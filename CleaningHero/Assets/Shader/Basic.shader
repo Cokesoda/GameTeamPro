@@ -1,15 +1,14 @@
-Shader "Custom/Puzzle"
+Shader "Custom/Basic"
 {
     Properties
     {
-        _Color("Color", Color) = (0,0,0,1)
-        _Intensity("Intensity", Range(0,10)) = 0
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
         LOD 200
+        Cull Off
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
@@ -25,9 +24,6 @@ Shader "Custom/Puzzle"
             float2 uv_MainTex;
         };
 
-        fixed4 _Color;
-        float _Intensity;
-
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
         // #pragma instancing_options assumeuniformscaling
@@ -39,7 +35,7 @@ Shader "Custom/Puzzle"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Emission = c.rgb + _Color * _Intensity;
+            o.Emission = c.rgb;
             o.Alpha = c.a;
         }
         ENDCG
