@@ -11,6 +11,7 @@ public class StartTuto : MonoBehaviour
     public GameObject Time;
     public GameObject InGame;
     public GameObject Key;
+    public GameObject Inventory;
     void Start()
     {
         HP.SetActive(true);
@@ -20,6 +21,7 @@ public class StartTuto : MonoBehaviour
         Time.SetActive(false);
         Key.SetActive(false);
         InGame.SetActive(false);
+        Inventory.SetActive(false);
     }
 
     // Update is called once per frame
