@@ -64,13 +64,15 @@ public class LeFSM : MonoBehaviour
                 state_Return();
                 break;
             case EnemyState.Hit:
-                //state_Hit();
+                state_Hit();
                 break;
             case EnemyState.Die:
-                //state_Die();
+                state_Die();
                 break;
         }
     }
+
+
     void state_Idle()
     {
         print("Idle");
@@ -82,11 +84,6 @@ public class LeFSM : MonoBehaviour
         {
             e_state = EnemyState.Move;
             print("Idle > Move");
-        }
-        //플레이어가 공격범위에 들어왔을때
-        if(statusScript.enemyAttackDistance > targetTrackingdistance)
-        {
-            e_state = EnemyState.Attack;
         }
     }
     void state_Move()
@@ -112,13 +109,8 @@ public class LeFSM : MonoBehaviour
     }
     void state_Attack()
     {
-        StartCoroutine(eAttack());
-    }
-    private IEnumerator eAttack()
-    {
-        print("Attack");
         //AnimationPlay(Attack);
-        yield return new WaitForSeconds(statusScript.enemyAttackspeed);
+        statusScript.playerHp =- statusScript.enemyAttackDamage;
     }
     void state_Return()
     {
@@ -128,11 +120,20 @@ public class LeFSM : MonoBehaviour
         nMa.SetDestination(originalPos);
         //복귀후 idle상태로 변경조건
                              //인식거리      플레이어와의 거리                                                          
-        if(statusScript.enemyFindDistance > targetTrackingdistance
-                                                                           //초기 위치   
+        if(statusScript.enemyFindDistance > targetTrackingdistance 
             && Vector3.Distance(originalPos, transform.position)<=0.1)
         {
             e_state = EnemyState.Idle;
         }
     }
+
+    private void state_Hit()
+    {
+
+    }
+    private void state_Die()
+    {
+
+    }
+
 }
