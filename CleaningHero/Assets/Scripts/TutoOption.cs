@@ -102,4 +102,9 @@ public class TutoOption : MonoBehaviour
     {
         keySet.SetActive(true);
     }
+
+    public void OnclickCloseInven()
+    {
+        Inven.SetActive(false);
+    }
 }
