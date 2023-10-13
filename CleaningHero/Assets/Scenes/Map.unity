@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: a37a733637d26b8459c4c6679c1bc681, type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 233d1249d5e7d2a4f82fabfac6627fb8, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1902,6 +1902,10 @@ PrefabInstance:
     - target: {fileID: 1533470367431139766, guid: 20fbaa62fe7b0814b98008245f32a4ce, type: 3}
       propertyPath: m_Name
       value: '[fbx]desk'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232881600707187829, guid: 20fbaa62fe7b0814b98008245f32a4ce, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
