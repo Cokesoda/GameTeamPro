@@ -8,17 +8,10 @@ public class LeFSM : MonoBehaviour
 {
     GameObject player;
     float targetTrackingdistance;
-    /*public float findDistance = 10f;           //인식 범위 
-    public float attackDistance = 1f;            //공격 범위
-    public float returnDistance = 20f;         //이동반경 제한 범위*/       //스테이터스 변수 스크립트로 이동
-
-    //public float attackDamage = 10;           //스테이터스 변수 스크립트로 이동
 
     Vector3 originalPos;                                //기존 생성위치 포지션 값
 
     NavMeshAgent nMa;
-
-    GameObject GameManager;
 
     EnemyState e_state;
     enum EnemyState
@@ -32,19 +25,27 @@ public class LeFSM : MonoBehaviour
         Finded
     }
     LMstatus statusScript;
+
     void Start()
     {
         statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
         e_state = EnemyState.Idle;
-        nMa = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");                                   //메인 캐릭터 오브젝트 이름 변경         *중요
-        originalPos = transform.position;                                                                           //생성된 위치를 초기위치로 저장
-
+        nMa = GameObject.FindGameObjectWithTag("Enemy1").GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
+        originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
+        nMa.speed = statusScript.enemyMovespeed;//몹 이동속도
+        
     }
-    
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, statusScript.enemyFindDistance);
+    }
     // Update is called once per frame
     void Update()
     {
+        
         targetTrackingdistance = Vector3.Distance(player.transform.position,transform.position);
         print("몬스터와의 거리 = " + targetTrackingdistance);
         print("인식 위치=" + statusScript.enemyFindDistance);
@@ -92,6 +93,7 @@ public class LeFSM : MonoBehaviour
     {
         print("Move");
         nMa.SetDestination(player.transform.position);
+        nMa.stoppingDistance = statusScript.enemyAttackDistance - 0.09f;
         //공격 거리에 들어왔을 경우
              //플레이어와의 거리       공격 거리
         if(targetTrackingdistance <= statusScript.enemyAttackDistance)
