@@ -30,6 +30,7 @@ public class LeFSM : MonoBehaviour
     {
         statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
         e_state = EnemyState.Idle;
+<<<<<<< Updated upstream
         nMa = GameObject.FindGameObjectWithTag("Enemy1").GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
@@ -41,6 +42,12 @@ public class LeFSM : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, statusScript.enemyFindDistance);
+=======
+        nMa = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");           //메인 캐릭터 오브젝트 이름 변경         *중요
+        originalPos = transform.position;                             //생성된 위치를 초기위치로 저장
+
+>>>>>>> Stashed changes
     }
     // Update is called once per frame
     void Update()
