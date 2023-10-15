@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 3;
+    public float moveSpeed = 3f;
+    public float jumpPower = 1f;
+    public bool isJumping = false;
+
     CharacterController cc;
 
-    float gravity = -20;
+    float gravity = -3f;
     float yVelocity = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        //cc = GetComponent<CharacterController>();
+        cc = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -26,9 +29,23 @@ public class PlayerMove : MonoBehaviour
         dir = dir.normalized;
         dir = Camera.main.transform.TransformDirection(dir);
 
-        yVelocity += gravity * Time.deltaTime;
-        //dir.y = yVelocity;
-        //cc.Move(dir * moveSpeed * Time.deltaTime);
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        if (isJumping && cc.collisionFlags == CollisionFlags.Below)
+        {
+            isJumping = false;
+            yVelocity = 0;
+            
+        }
+        if(Input.GetButtonDown("Jump") && !isJumping)
+        {
+            yVelocity = jumpPower / 15;
+            isJumping = true;
+        }
+        if (isJumping)
+        {
+            yVelocity += gravity * Time.deltaTime;
+        }
+
+        dir.y = yVelocity;
+        cc.Move(dir * moveSpeed * Time.deltaTime);
     }
 }

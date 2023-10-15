@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CamRotate : MonoBehaviour
 {
-    public float rotSpeed = 200;
+    public float rotSpeed = 100;
     float mx = 0;
     float my = 0;
 
@@ -22,9 +22,9 @@ public class CamRotate : MonoBehaviour
 
         mx += mouse_X * rotSpeed * Time.deltaTime;
         my += mouse_Y * rotSpeed * Time.deltaTime;
-        //mx = Mathf.Clamp(mx, -40, 40);
-        //my = Mathf.Clamp(my, -10, 40);
-        my = Mathf.Clamp(my, -90, 90);
+        mx = Mathf.Clamp(mx, -40, 40);
+        my = Mathf.Clamp(my, -10, 40);
+        //my = Mathf.Clamp(my, -90, 90);
 
         transform.eulerAngles = new Vector3(-my, mx, 0);
     }
