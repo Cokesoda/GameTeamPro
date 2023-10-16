@@ -22,7 +22,7 @@ public class CamRotate : MonoBehaviour
 
         mx += mouse_X * rotSpeed * Time.deltaTime;
         my += mouse_Y * rotSpeed * Time.deltaTime;
-        //mx = Mathf.Clamp(mx, -40, 40);
+        mx = Mathf.Clamp(mx, -40, 40);
         my = Mathf.Clamp(my, -10, 40);
         //my = Mathf.Clamp(my, -90, 90);
 
