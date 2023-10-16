@@ -34,7 +34,7 @@ public class LeFSM : MonoBehaviour
         nMa = GameObject.FindGameObjectWithTag("Enemy1").GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
-        nMa.speed = statusScript.enemyMovespeed;//몹 이동속도
+        nMa.speed = statusScript.enemyMovespeed;            //몹 이동속도
         e_state = EnemyState.Idle;
     }
 
@@ -98,39 +98,47 @@ public class LeFSM : MonoBehaviour
         if(targetTrackingdistance < statusScript.enemyAttackDistance)
             //플레이어가 공격거리내에 들어온 경우
         {
-            state_Attack();
             print("Move > Attack");
+            e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
-        if (Vector3.Distance(originalPos, transform.position) > statusScript.enemyReturnDistance)
+        if(Vector3.Distance(originalPos, transform.position) > statusScript.enemyReturnDistance)
             //이동중 복귀거리 이상 이동한 경우
         {
-            e_state = EnemyState.Return;
+            nMa.stoppingDistance = 0.001f;
             print("Move > Return");
+            e_state = EnemyState.Return;
         }
     }
     void state_Attack()
     {
-        if (currentTime > statusScript.enemyAttackspeed)
+        if(currentTime > statusScript.enemyAttackspeed)
         {
-            print("공격");
-            currentTime = 0;
+            //StartCoroutine(eAttack());
         }
-        else
+        else if(statusScript.enemyAttackDistance < targetTrackingdistance)
         {
             e_state = EnemyState.Move;
             currentTime = 0;
         }
         //AnimationPlay(Attack);
     }
+    /*IEnumerator eAttack()
+    {
+        statusScript.playerHp =- statusScript.enemyAttackDamage;
+        yield return new WaitForSeconds(statusScript.enemyAttackspeed);                               //1016_11:27
+        if()
+    }*/
     void state_Return()
     {
+        print(originalPos);
         print("Return");
         nMa.isStopped = true;
         nMa.ResetPath();
         nMa.SetDestination(originalPos);
+
         //복귀후 idle상태로 변경조건                                                    
-        if(Vector3.Distance(transform.position,originalPos)<=0.01f)
+        if(Vector3.Distance(transform.position,originalPos)<0.2f)
         {
             nMa.isStopped = true;
             nMa.ResetPath();
