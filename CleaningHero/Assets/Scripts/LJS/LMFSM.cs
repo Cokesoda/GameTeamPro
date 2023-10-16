@@ -8,17 +8,10 @@ public class LeFSM : MonoBehaviour
 {
     GameObject player;
     float targetTrackingdistance;
-    /*public float findDistance = 10f;           //인식 범위 
-    public float attackDistance = 1f;            //공격 범위
-    public float returnDistance = 20f;         //이동반경 제한 범위*/       //스테이터스 변수 스크립트로 이동
-
-    //public float attackDamage = 10;           //스테이터스 변수 스크립트로 이동
 
     Vector3 originalPos;                                //기존 생성위치 포지션 값
 
     NavMeshAgent nMa;
-
-    GameObject GameManager;
 
     EnemyState e_state;
     enum EnemyState
@@ -32,16 +25,21 @@ public class LeFSM : MonoBehaviour
         Finded
     }
     LMstatus statusScript;
+
     void Start()
     {
         statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
         e_state = EnemyState.Idle;
+<<<<<<< HEAD
 <<<<<<< HEAD
         nMa = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");                                   //메인 캐릭터 오브젝트 이름 변경         *중요
         originalPos = transform.position;                                                                           //생성된 위치를 초기위치로 저장
 
 =======
+=======
+<<<<<<< Updated upstream
+>>>>>>> parent of bca9f25 (Merge pull request #9 from Cokesoda/JeaSeong)
         nMa = GameObject.FindGameObjectWithTag("Enemy1").GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
@@ -53,12 +51,21 @@ public class LeFSM : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, statusScript.enemyFindDistance);
+<<<<<<< HEAD
 >>>>>>> parent of c5e3fa0 (10/14_16:36 Restore)
+=======
+=======
+        nMa = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");           //메인 캐릭터 오브젝트 이름 변경         *중요
+        originalPos = transform.position;                             //생성된 위치를 초기위치로 저장
+
+>>>>>>> Stashed changes
+>>>>>>> parent of bca9f25 (Merge pull request #9 from Cokesoda/JeaSeong)
     }
-    
     // Update is called once per frame
     void Update()
     {
+        
         targetTrackingdistance = Vector3.Distance(player.transform.position,transform.position);
         print("몬스터와의 거리 = " + targetTrackingdistance);
         print("인식 위치=" + statusScript.enemyFindDistance);
@@ -77,19 +84,20 @@ public class LeFSM : MonoBehaviour
                 state_Return();
                 break;
             case EnemyState.Hit:
-                //state_Hit();
+                state_Hit();
                 break;
             case EnemyState.Die:
-                //state_Die();
-                break;
-            case EnemyState.Finded:
-                //state_Finded();
+                state_Die();
                 break;
         }
     }
+
+
     void state_Idle()
     {
         print("Idle");
+        //Animation(IdlePlay);  //애니메이션 Idle상태 완료후 추가
+
         //플레이어가 인식거리에 들어왔을 경우
                       //설정된 인식 거리      현재 거리
         if(statusScript.enemyFindDistance >= targetTrackingdistance)
@@ -97,15 +105,12 @@ public class LeFSM : MonoBehaviour
             e_state = EnemyState.Move;
             print("Idle > Move");
         }
-        if(statusScript.enemyAttackDistance > targetTrackingdistance)
-        {
-            e_state = EnemyState.Attack;
-        }
     }
     void state_Move()
     {
         print("Move");
         nMa.SetDestination(player.transform.position);
+        nMa.stoppingDistance = statusScript.enemyAttackDistance - 0.09f;
         //공격 거리에 들어왔을 경우
              //플레이어와의 거리       공격 거리
         if(targetTrackingdistance <= statusScript.enemyAttackDistance)
@@ -124,12 +129,8 @@ public class LeFSM : MonoBehaviour
     }
     void state_Attack()
     {
-        StartCoroutine(eAttack());
-    }
-    private IEnumerator eAttack()
-    {
-        print("Attack");
-        yield return new WaitForSeconds(statusScript.enemyAttackspeed);
+        //AnimationPlay(Attack);
+        statusScript.playerHp =- statusScript.enemyAttackDamage;
     }
     void state_Return()
     {
@@ -139,11 +140,20 @@ public class LeFSM : MonoBehaviour
         nMa.SetDestination(originalPos);
         //복귀후 idle상태로 변경조건
                              //인식거리      플레이어와의 거리                                                          
-        if(statusScript.enemyFindDistance > targetTrackingdistance
-                                                                           //초기 위치   
+        if(statusScript.enemyFindDistance > targetTrackingdistance 
             && Vector3.Distance(originalPos, transform.position)<=0.1)
         {
             e_state = EnemyState.Idle;
         }
     }
+
+    private void state_Hit()
+    {
+
+    }
+    private void state_Die()
+    {
+
+    }
+
 }
