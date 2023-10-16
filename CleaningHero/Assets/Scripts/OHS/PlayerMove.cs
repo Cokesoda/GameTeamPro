@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    public float jumpPower = 1f;
+    public float jumpPower = 4f;
     public bool isJumping = false;
 
     CharacterController cc;
