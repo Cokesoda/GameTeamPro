@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CamRotate : MonoBehaviour
 {
-    public float rotSpeed = 100;
+    public float rotSpeed = 50;
     float mx = 0;
     float my = 0;
 
