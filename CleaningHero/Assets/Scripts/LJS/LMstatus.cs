@@ -14,7 +14,7 @@ public class LMstatus : MonoBehaviour
     public float enemyAttackDamage = 1;    //적 공격력
     public float enemyHp = 100;            //적 체력
     public float enemyAttackspeed = 1;     //적 공격속도(초)
-    public float enemyMovespeed = 5;
+    public float enemyMovespeed = 5;       //적 이동속도
     public float playerHp = 100;
 
     public float playerAttackDistance = 10;//플레이어 공격 거리

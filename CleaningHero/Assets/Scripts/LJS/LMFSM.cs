@@ -7,11 +7,11 @@ using UnityEngine.AI;
 public class LeFSM : MonoBehaviour
 {
     GameObject player;
-    float targetTrackingdistance;
-
-    Vector3 originalPos;                                //기존 생성위치 포지션 값
-
     NavMeshAgent nMa;
+    LMstatus statusScript;
+
+    float targetTrackingdistance;
+    Vector3 originalPos;  //기존 생성위치 포지션 값
 
     EnemyState e_state;
     enum EnemyState
@@ -24,22 +24,11 @@ public class LeFSM : MonoBehaviour
         Die,
         Finded
     }
-    LMstatus statusScript;
 
     void Start()
     {
         statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
         e_state = EnemyState.Idle;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        nMa = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");                                   //메인 캐릭터 오브젝트 이름 변경         *중요
-        originalPos = transform.position;                                                                           //생성된 위치를 초기위치로 저장
-
-=======
-=======
-<<<<<<< Updated upstream
->>>>>>> parent of bca9f25 (Merge pull request #9 from Cokesoda/JeaSeong)
         nMa = GameObject.FindGameObjectWithTag("Enemy1").GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
@@ -51,18 +40,8 @@ public class LeFSM : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, statusScript.enemyFindDistance);
-<<<<<<< HEAD
->>>>>>> parent of c5e3fa0 (10/14_16:36 Restore)
-=======
-=======
-        nMa = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");           //메인 캐릭터 오브젝트 이름 변경         *중요
-        originalPos = transform.position;                             //생성된 위치를 초기위치로 저장
-
->>>>>>> Stashed changes
->>>>>>> parent of bca9f25 (Merge pull request #9 from Cokesoda/JeaSeong)
     }
-    // Update is called once per frame
+
     void Update()
     {
         
