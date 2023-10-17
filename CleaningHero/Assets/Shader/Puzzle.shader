@@ -39,7 +39,7 @@ Shader "Custom/Puzzle"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Albedo = c.rgb + _Color * _Intensity;
+            o.Emission = c.rgb + _Color * _Intensity;
             o.Alpha = c.a;
         }
         ENDCG
