@@ -119,3 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1296afe4817890c42b637a43cc7a7ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyFindDistance: 2
+  enemyAttackDistance: 1.5
+  enemyReturnDistance: 2
+  enemyAttackDamage: 1
+  enemyHp: 100
+  enemyAttackspeed: 0.01
+  enemyMovespeed: 1
+  currentTime: 0
