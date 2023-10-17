@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 2f;
+    public float moveSpeed = 2/40f;
     public float jumpPower = 4f;
     public bool isJumping = false;
 
@@ -39,11 +39,9 @@ public class PlayerMove : MonoBehaviour
             yVelocity = jumpPower / 15;
             isJumping = true;
         }
-        if (isJumping || ("None").Equals(cc.collisionFlags))
-        {
-            yVelocity += gravity * Time.deltaTime;
-        }
+        //if (isJumping){}
 
+        yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
         cc.Move(dir * moveSpeed * Time.deltaTime);
     }
