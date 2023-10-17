@@ -15,6 +15,7 @@ public class LeFSM : MonoBehaviour
     Vector3 originalPos;  //기존 생성위치 포지션 값
 
     public float currentTime = 0;
+    bool canAttack = false;
 
     EnemyState e_state;
     enum EnemyState
@@ -49,8 +50,8 @@ public class LeFSM : MonoBehaviour
     void Update()
     {
         targetTrackingdistance = Vector3.Distance(player.transform.position,transform.position);
-        print("몬스터와의 거리 = " + targetTrackingdistance);
-        print("초기 위치와의 거리 = " + Vector3.Distance(originalPos, transform.position));
+        /*print("몬스터와의 거리 = " + targetTrackingdistance);
+        print("초기 위치와의 거리 = " + Vector3.Distance(originalPos, transform.position));*/
         currentTime += Time.deltaTime;
 
         switch (e_state)
@@ -99,12 +100,14 @@ public class LeFSM : MonoBehaviour
             //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
+            canAttack = true;
             e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
         if(Vector3.Distance(originalPos, transform.position) > statusScript.enemyReturnDistance)
             //이동중 복귀거리 이상 이동한 경우
         {
+            canAttack = false;
             nMa.stoppingDistance = 0.001f;
             print("Move > Return");
             e_state = EnemyState.Return;
@@ -112,23 +115,28 @@ public class LeFSM : MonoBehaviour
     }
     void state_Attack()
     {
-        if(currentTime > statusScript.enemyAttackspeed)
-        {
-            //StartCoroutine(eAttack());
-        }
-        else if(statusScript.enemyAttackDistance < targetTrackingdistance)
-        {
-            e_state = EnemyState.Move;
-            currentTime = 0;
-        }
+        StartCoroutine(eAttack());
         //AnimationPlay(Attack);
     }
-    /*IEnumerator eAttack()
+    IEnumerator eAttack()
     {
-        statusScript.playerHp =- statusScript.enemyAttackDamage;
-        yield return new WaitForSeconds(statusScript.enemyAttackspeed);                               //1016_11:27
-        if()
-    }*/
+        if (canAttack)//공격 가능한 경우
+        {
+            canAttack = false;
+            statusScript.playerHp = -statusScript.enemyAttackDamage;
+            print("Attack");
+            yield return new WaitForSeconds(statusScript.enemyAttackspeed);
+            if (targetTrackingdistance < statusScript.enemyAttackDistance)
+            {
+                canAttack = true;
+            }
+            else if(targetTrackingdistance > statusScript.enemyAttackDistance)
+            {
+                print("Attack > Move");
+                e_state = EnemyState.Move;
+            }
+        }
+    }
     void state_Return()
     {
         print(originalPos);
