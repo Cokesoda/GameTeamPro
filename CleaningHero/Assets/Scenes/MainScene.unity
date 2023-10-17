@@ -1135,6 +1135,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1825848463}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1315406560}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       insertIndex: -1
@@ -1145,6 +1148,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       insertIndex: -1
       addedObject: {fileID: 988410307}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 988410310}
   m_SourcePrefab: {fileID: 100100000, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
 --- !u!1 &988410296 stripped
 GameObject:
@@ -1210,6 +1216,21 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!114 &988410310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988410296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41abed4605aacce48b00aaf3ccdedcf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePosition: {fileID: 1315406559}
+  bulletFactory: {fileID: 7337053914178110725, guid: ffcbe9e247f681d4f8a0792368e2a903, type: 3}
+  wbPower: 15
 --- !u!1 &991731447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,6 +1668,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1315406559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315406560}
+  m_Layer: 0
+  m_Name: FirePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1315406560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315406559}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.22, z: 0.100000024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 988410300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1358230069
 PrefabInstance:
@@ -2262,7 +2314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1825848463}
   m_Layer: 0
-  m_Name: CamPosition
+  m_Name: CamPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2277,7 +2329,7 @@ Transform:
   m_GameObject: {fileID: 1825848462}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: -0.6}
+  m_LocalPosition: {x: 0, y: 0.3, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
