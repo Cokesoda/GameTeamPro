@@ -8,11 +8,21 @@ public class LeFSM : MonoBehaviour
 {
     GameObject player;
     NavMeshAgent nMa;
-    LMstatus statusScript;
+    //LMstatus statusScript;
+    [Range(5, 0.1f)]
+    public float enemyFindDistance = 0.5f;   //적 인식 거리
+    [Range(5, 0.1f)]
+    public float enemyAttackDistance = 1;    //적 공격 거리
+    [Range(5, 0.1f)]
+    public float enemyReturnDistance = 1.5f; //적 복귀 거리
 
+    public float enemyAttackDamage = 1;      //적 공격력
+    public float enemyHp = 100;              //적 체력
+    public float enemyAttackspeed = 0.01f;   //적 공격속도(초)
+    public float enemyMovespeed = 5;         //적 이동속도
 
     float targetTrackingdistance;
-    Vector3 originalPos;  //기존 생성위치 포지션 값
+    Vector3 originalPos;                     //기존 생성위치 포지션 값
 
     public float currentTime = 0;
     bool canAttack = false;
@@ -31,20 +41,20 @@ public class LeFSM : MonoBehaviour
 
     void Start()
     {
-        statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
-        nMa = GameObject.FindGameObjectWithTag("Enemy1").GetComponent<NavMeshAgent>();
+        //statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
+        nMa = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
-        nMa.speed = statusScript.enemyMovespeed;            //몹 이동속도
+        nMa.speed = enemyMovespeed;            //몹 이동속도
         e_state = EnemyState.Idle;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, statusScript.enemyFindDistance);
-        Gizmos.DrawWireSphere(transform.position, statusScript.enemyAttackDistance);
-        Gizmos.DrawWireSphere(transform.position, statusScript.enemyReturnDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyFindDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyAttackDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyReturnDistance);
     }
 
     void Update()
@@ -82,7 +92,7 @@ public class LeFSM : MonoBehaviour
     {
         print("Idle");
         //Animation(IdlePlay);
-        if(targetTrackingdistance < statusScript.enemyFindDistance)
+        if(targetTrackingdistance < enemyFindDistance)
             //플레이어가 인식거리에 들어온 경우
         {
             e_state = EnemyState.Move;
@@ -93,10 +103,10 @@ public class LeFSM : MonoBehaviour
     {
         print("Move");
         nMa.SetDestination(player.transform.position);
-        nMa.stoppingDistance = statusScript.enemyAttackDistance - 0.09f;
+        nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
 
-        if(targetTrackingdistance < statusScript.enemyAttackDistance)
+        if(targetTrackingdistance < enemyAttackDistance)
             //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
@@ -104,7 +114,7 @@ public class LeFSM : MonoBehaviour
             e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
-        if(Vector3.Distance(originalPos, transform.position) > statusScript.enemyReturnDistance)
+        if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
             //이동중 복귀거리 이상 이동한 경우
         {
             canAttack = false;
@@ -123,14 +133,14 @@ public class LeFSM : MonoBehaviour
         if (canAttack)//공격 가능한 경우
         {
             canAttack = false;
-            statusScript.playerHp = -statusScript.enemyAttackDamage;
+            /*statusScript.playerHp = -statusScript.enemyAttackDamage;*/
             print("Attack");
-            yield return new WaitForSeconds(statusScript.enemyAttackspeed);
-            if (targetTrackingdistance < statusScript.enemyAttackDistance)
+            yield return new WaitForSeconds(enemyAttackspeed);
+            if (targetTrackingdistance < enemyAttackDistance)
             {
                 canAttack = true;
             }
-            else if(targetTrackingdistance > statusScript.enemyAttackDistance)
+            else if(targetTrackingdistance > enemyAttackDistance)
             {
                 print("Attack > Move");
                 e_state = EnemyState.Move;
