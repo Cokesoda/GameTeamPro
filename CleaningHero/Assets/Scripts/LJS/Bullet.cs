@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public GameObject objBullet;
-    public Transform mShotpos;
-    GameObject Lobj;
+    public GameObject player;
+    public GameObject enemy;
 
     Rigidbody Lrb;
+    LeFSM eFSM;
+    LMstatus pStatus;
 
     // Start is called before the first frame update
     void Start()
     {
-        Lobj = Instantiate(objBullet,mShotpos);
         Lrb = GetComponent<Rigidbody>();
+        Lrb.AddRelativeForce(0, 100, 0);
     }
-    private void OnCollisionEnter(Collision collision) //다른 오브젝트와 충돌했을 경우
+    void OnCollisionEnter(Collision collision) //다른 오브젝트와 충돌했을 경우
     {
-        Destroy(Lobj);
+        if (collision.collider.CompareTag("Player"))
+        {
+            //pStatus.playerHp =- eFSM.enemyAttackDamage; 데미지 적용 할 차례
+            print(pStatus.playerHp);
+        }
+        
+        Destroy(gameObject,0.5f);
     }
 }

@@ -8,6 +8,9 @@ public class LeFSM : MonoBehaviour
 {
     GameObject player;
     NavMeshAgent nMa;
+    public GameObject bulletObj;
+    public Transform shotPos;
+
     //LMstatus statusScript;
     [Range(5, 0.1f)]
     public float enemyFindDistance = 0.5f;   //적 인식 거리
@@ -19,6 +22,7 @@ public class LeFSM : MonoBehaviour
     public float enemyAttackDamage = 1;      //적 공격력
     public float enemyHp = 100;              //적 체력
     public float enemyAttackspeed = 0.01f;   //적 공격속도(초)
+    [Range(1,0.1f)]
     public float enemyMovespeed = 5;         //적 이동속도
 
     float targetTrackingdistance;
@@ -95,6 +99,7 @@ public class LeFSM : MonoBehaviour
         if(targetTrackingdistance < enemyFindDistance)
             //플레이어가 인식거리에 들어온 경우
         {
+            transform.LookAt(player.transform);
             e_state = EnemyState.Move;
             print("Idle > Move");
         }
@@ -134,7 +139,8 @@ public class LeFSM : MonoBehaviour
         {
             canAttack = false;
             /*statusScript.playerHp = -statusScript.enemyAttackDamage;*/
-            print("Attack");
+            transform.LookAt(player.transform);
+            Instantiate(bulletObj,shotPos.position,shotPos.rotation);
             yield return new WaitForSeconds(enemyAttackspeed);
             if (targetTrackingdistance < enemyAttackDistance)
             {
