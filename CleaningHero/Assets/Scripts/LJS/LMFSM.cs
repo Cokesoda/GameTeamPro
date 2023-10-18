@@ -7,18 +7,25 @@ using UnityEngine.AI;
 public class LeFSM : MonoBehaviour
 {
     GameObject player;
-    float targetTrackingdistance;
-    /*public float findDistance = 10f;           //인식 범위 
-    public float attackDistance = 1f;            //공격 범위
-    public float returnDistance = 20f;         //이동반경 제한 범위*/       //스테이터스 변수 스크립트로 이동
-
-    //public float attackDamage = 10;           //스테이터스 변수 스크립트로 이동
-
-    Vector3 originalPos;                                //기존 생성위치 포지션 값
-
     NavMeshAgent nMa;
+    //LMstatus statusScript;
+    [Range(5, 0.1f)]
+    public float enemyFindDistance = 0.5f;   //적 인식 거리
+    [Range(5, 0.1f)]
+    public float enemyAttackDistance = 1;    //적 공격 거리
+    [Range(5, 0.1f)]
+    public float enemyReturnDistance = 1.5f; //적 복귀 거리
 
-    GameObject GameManager;
+    public float enemyAttackDamage = 1;      //적 공격력
+    public float enemyHp = 100;              //적 체력
+    public float enemyAttackspeed = 0.01f;   //적 공격속도(초)
+    public float enemyMovespeed = 5;         //적 이동속도
+
+    float targetTrackingdistance;
+    Vector3 originalPos;                     //기존 생성위치 포지션 값
+
+    public float currentTime = 0;
+    bool canAttack = false;
 
     EnemyState e_state;
     enum EnemyState
@@ -31,23 +38,32 @@ public class LeFSM : MonoBehaviour
         Die,
         Finded
     }
-    LMstatus statusScript;
+
     void Start()
     {
-        statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
-        e_state = EnemyState.Idle;
+        //statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
         nMa = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");                                   //메인 캐릭터 오브젝트 이름 변경         *중요
-        originalPos = transform.position;                                                                           //생성된 위치를 초기위치로 저장
-
+        player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
+        originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
+        nMa.speed = enemyMovespeed;            //몹 이동속도
+        e_state = EnemyState.Idle;
     }
-    
-    // Update is called once per frame
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, enemyFindDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyAttackDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyReturnDistance);
+    }
+
     void Update()
     {
         targetTrackingdistance = Vector3.Distance(player.transform.position,transform.position);
-        print("몬스터와의 거리 = " + targetTrackingdistance);
-        print("인식 위치=" + statusScript.enemyFindDistance);
+        /*print("몬스터와의 거리 = " + targetTrackingdistance);
+        print("초기 위치와의 거리 = " + Vector3.Distance(originalPos, transform.position));*/
+        currentTime += Time.deltaTime;
+
         switch (e_state)
         {
             case EnemyState.Idle:
@@ -63,73 +79,99 @@ public class LeFSM : MonoBehaviour
                 state_Return();
                 break;
             case EnemyState.Hit:
-                //state_Hit();
+                state_Hit();
                 break;
             case EnemyState.Die:
-                //state_Die();
-                break;
-            case EnemyState.Finded:
-                //state_Finded();
+                state_Die();
                 break;
         }
     }
+
+
     void state_Idle()
     {
         print("Idle");
-        //플레이어가 인식거리에 들어왔을 경우
-                      //설정된 인식 거리      현재 거리
-        if(statusScript.enemyFindDistance >= targetTrackingdistance)
+        //Animation(IdlePlay);
+        if(targetTrackingdistance < enemyFindDistance)
+            //플레이어가 인식거리에 들어온 경우
         {
             e_state = EnemyState.Move;
             print("Idle > Move");
-        }
-        if(statusScript.enemyAttackDistance > targetTrackingdistance)
-        {
-            e_state = EnemyState.Attack;
         }
     }
     void state_Move()
     {
         print("Move");
         nMa.SetDestination(player.transform.position);
-        //공격 거리에 들어왔을 경우
-             //플레이어와의 거리       공격 거리
-        if(targetTrackingdistance <= statusScript.enemyAttackDistance)
+        nMa.stoppingDistance = enemyAttackDistance - 0.09f;
+        //공격거리의 -0.09까지 가서 멈춤
+
+        if(targetTrackingdistance < enemyAttackDistance)
+            //플레이어가 공격거리내에 들어온 경우
         {
-            state_Attack();
             print("Move > Attack");
+            canAttack = true;
+            e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
-                                     //초기 위치와의 거리            복귀 거리
-        if (Vector3.Distance(originalPos, transform.position) <= statusScript.enemyReturnDistance
-            && statusScript.enemyFindDistance < targetTrackingdistance)
+        if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
+            //이동중 복귀거리 이상 이동한 경우
         {
-            e_state = EnemyState.Return;
+            canAttack = false;
+            nMa.stoppingDistance = 0.001f;
             print("Move > Return");
+            e_state = EnemyState.Return;
         }
     }
     void state_Attack()
     {
         StartCoroutine(eAttack());
+        //AnimationPlay(Attack);
     }
-    private IEnumerator eAttack()
+    IEnumerator eAttack()
     {
-        print("Attack");
-        yield return new WaitForSeconds(statusScript.enemyAttackspeed);
+        if (canAttack)//공격 가능한 경우
+        {
+            canAttack = false;
+            /*statusScript.playerHp = -statusScript.enemyAttackDamage;*/
+            print("Attack");
+            yield return new WaitForSeconds(enemyAttackspeed);
+            if (targetTrackingdistance < enemyAttackDistance)
+            {
+                canAttack = true;
+            }
+            else if(targetTrackingdistance > enemyAttackDistance)
+            {
+                print("Attack > Move");
+                e_state = EnemyState.Move;
+            }
+        }
     }
     void state_Return()
     {
+        print(originalPos);
         print("Return");
         nMa.isStopped = true;
         nMa.ResetPath();
         nMa.SetDestination(originalPos);
-        //복귀후 idle상태로 변경조건
-                             //인식거리      플레이어와의 거리                                                          
-        if(statusScript.enemyFindDistance > targetTrackingdistance
-                                                                           //초기 위치   
-            && Vector3.Distance(originalPos, transform.position)<=0.1)
+
+        //복귀후 idle상태로 변경조건                                                    
+        if(Vector3.Distance(transform.position,originalPos)<0.2f)
         {
+            nMa.isStopped = true;
+            nMa.ResetPath();
+            print("Return > Idle");
             e_state = EnemyState.Idle;
         }
     }
+
+    private void state_Hit()
+    {
+
+    }
+    private void state_Die()
+    {
+
+    }
+
 }
