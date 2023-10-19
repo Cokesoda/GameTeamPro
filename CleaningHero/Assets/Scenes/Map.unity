@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3f09b8be9b096c94a8d5aaebbbd0b879, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 5b18ef948c5b81640bd735c8f891dc73, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 135028783}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.30318117, y: 0.7844007, z: -0.36064374}
+  m_LocalPosition: {x: -0.30318117, y: 0.529, z: -0.36064374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1221,12 +1221,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1013249942}
   - component: {fileID: 1013249941}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!108 &1013249941
 Light:
@@ -1240,8 +1240,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
-  m_Range: 15
+  m_Intensity: 1.5
+  m_Range: 13
   m_SpotAngle: 179
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -1299,7 +1299,7 @@ Transform:
   m_GameObject: {fileID: 1013249940}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.30318117, y: 1.691, z: -0.36064374}
+  m_LocalPosition: {x: 0, y: 1.599, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1547,9 +1547,17 @@ PrefabInstance:
       value: '[fbx]musicBox'
       objectReference: {fileID: 0}
     - target: {fileID: 5204639343791245254, guid: 543d8f9a86baa07498893d51e36863da, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5204639343791245254, guid: 543d8f9a86baa07498893d51e36863da, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c59d5a7f35e038c4f97bba7078619c75, type: 2}
+    - target: {fileID: 8221758638684445804, guid: 543d8f9a86baa07498893d51e36863da, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8221758638684445804, guid: 543d8f9a86baa07498893d51e36863da, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1980,7 +1988,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!108 &1432516437
 Light:
@@ -2033,7 +2041,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
