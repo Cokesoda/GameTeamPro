@@ -26,6 +26,7 @@ public class PlayerFire : MonoBehaviour
                 //transform.TransformDirection(Vector3.forward)
                 //Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward * hitInfo.distance, Color.yellow);
                 wBulletEffect.transform.position = hitInfo.point;
+                wBulletEffect.transform.forward = hitInfo.normal;
                 ps.Play();
             }
 
