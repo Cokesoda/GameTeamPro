@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LeFSM : MonoBehaviour
+public class LMFSM : MonoBehaviour
 {
     GameObject player;
     NavMeshAgent nMa;
     public GameObject bulletObj;
     public Transform shotPos;
+    GameObject playerStatus;
+    LMstatus xLMstatus;
 
     //LMstatus statusScript;
     [Range(5, 0.1f)]
@@ -24,6 +26,8 @@ public class LeFSM : MonoBehaviour
     public float enemyAttackspeed = 0.01f;   //적 공격속도(초)
     [Range(1,0.1f)]
     public float enemyMovespeed = 5;         //적 이동속도
+    public float enemySpinspeed = 90;        //적 회전속도
+    public float enemyHittime = 2f;          //적 피격시간
 
     float targetTrackingdistance;
     Vector3 originalPos;                     //기존 생성위치 포지션 값
@@ -43,14 +47,18 @@ public class LeFSM : MonoBehaviour
         Finded
     }
 
+    
     void Start()
     {
         //statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
         nMa = GetComponent<NavMeshAgent>();
+        playerStatus = GameObject.Find("GameManager");
+        xLMstatus = playerStatus.GetComponent<LMstatus>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;            //몹 이동속도
         e_state = EnemyState.Idle;
+
     }
 
     private void OnDrawGizmos()
@@ -63,9 +71,8 @@ public class LeFSM : MonoBehaviour
 
     void Update()
     {
+        print(xLMstatus.playerHp);
         targetTrackingdistance = Vector3.Distance(player.transform.position,transform.position);
-        /*print("몬스터와의 거리 = " + targetTrackingdistance);
-        print("초기 위치와의 거리 = " + Vector3.Distance(originalPos, transform.position));*/
         currentTime += Time.deltaTime;
 
         switch (e_state)
@@ -89,6 +96,7 @@ public class LeFSM : MonoBehaviour
                 state_Die();
                 break;
         }
+        
     }
 
 
@@ -110,8 +118,8 @@ public class LeFSM : MonoBehaviour
         nMa.SetDestination(player.transform.position);
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
-
-        if(targetTrackingdistance < enemyAttackDistance)
+        transform.LookAt(player.transform);
+        if (targetTrackingdistance < enemyAttackDistance)
             //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
@@ -130,6 +138,7 @@ public class LeFSM : MonoBehaviour
     }
     void state_Attack()
     {
+        transform.LookAt(player.transform);
         StartCoroutine(eAttack());
         //AnimationPlay(Attack);
     }
@@ -138,12 +147,13 @@ public class LeFSM : MonoBehaviour
         if (canAttack)//공격 가능한 경우
         {
             canAttack = false;
-            /*statusScript.playerHp = -statusScript.enemyAttackDamage;*/
-            transform.LookAt(player.transform);
+
             Instantiate(bulletObj,shotPos.position,shotPos.rotation);
+            
             yield return new WaitForSeconds(enemyAttackspeed);
             if (targetTrackingdistance < enemyAttackDistance)
             {
+                //공격()
                 canAttack = true;
             }
             else if(targetTrackingdistance > enemyAttackDistance)
@@ -173,11 +183,17 @@ public class LeFSM : MonoBehaviour
 
     private void state_Hit()
     {
-
+        StartCoroutine(hitstate());
+        e_state = EnemyState.Move;
+    }
+    IEnumerator hitstate()
+    {
+        //AnimationPlay(피격);
+        yield return new WaitForSeconds(enemyHittime);
     }
     private void state_Die()
     {
-
+        //AnimationPlay(피격);
     }
 
 }
