@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d383ba185c67474c87e9fa61ab41749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHp: 100
+  playerHp: 150
   playerAttackDistance: 10
   playerAttackDamage: 10
   playerMoveSpeed: 5
