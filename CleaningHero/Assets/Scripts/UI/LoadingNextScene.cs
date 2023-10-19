@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class LoadingNextScene : MonoBehaviour
 {
-    public int SceneNumber = 3;
+    public int SceneNumber;
     public Slider loadingbar;
     public Text loadingText;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(TransitionNextScene(SceneNumber));
+        SceneNumber = SceneManager.GetActiveScene().buildIndex;
+        StartCoroutine(TransitionNextScene(SceneNumber+1));
+        
     }
 
     // Update is called once per frame

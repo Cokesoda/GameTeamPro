@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73614767d2e04342b73902f665001a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneNumber: 3
+  SceneNumber: 2
   loadingbar: {fileID: 1556066218}
   loadingText: {fileID: 1697549023}
 --- !u!4 &1244437256
