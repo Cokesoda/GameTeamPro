@@ -23,11 +23,12 @@ public class LMFSM : MonoBehaviour
 
     public float enemyAttackDamage = 1;      //적 공격력
     public float enemyHp = 100;              //적 체력
-    public float enemyAttackspeed = 0.01f;   //적 공격속도(초)
+    public float enemyAttackspeed = 0.01f;   //적 공격 속도(초)
     [Range(1,0.1f)]
-    public float enemyMovespeed = 5;         //적 이동속도
-    public float enemySpinspeed = 90;        //적 회전속도
-    public float enemyHittime = 2f;          //적 피격시간
+    public float enemyMovespeed = 5;         //적 이동 속도
+    public float enemySpinspeed = 90;        //적 회전 속도
+    public float enemyHittime = 2f;          //적 피격 시간(초)
+    public float enemyDietime = 2f;          //적 죽는 시간(초)
 
     float targetTrackingdistance;
     Vector3 originalPos;                     //기존 생성위치 포지션 값
@@ -183,17 +184,31 @@ public class LMFSM : MonoBehaviour
 
     private void state_Hit()
     {
-        StartCoroutine(hitstate());
-        e_state = EnemyState.Move;
+        if(enemyHp > 0)
+        {
+            StartCoroutine(hitstate());
+            e_state = EnemyState.Move;
+        }
+        else
+        {
+            e_state = EnemyState.Die;
+        }
     }
     IEnumerator hitstate()
     {
         //AnimationPlay(피격);
         yield return new WaitForSeconds(enemyHittime);
+        e_state = EnemyState.Move;
     }
     private void state_Die()
     {
-        //AnimationPlay(피격);
+        //AnimationPlay(죽음);
+        StartCoroutine(EnemyDiestate());
+    }
+    IEnumerator EnemyDiestate()
+    {
+        yield return new WaitForSeconds(enemyDietime);
+        Destroy(gameObject);
     }
 
 }
