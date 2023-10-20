@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MainCharCloth
-  m_Shader: {fileID: 4800000, guid: 08a9e089bd22f7943b3beb84c6ff74b6, type: 3}
+  m_Name: Shelf
+  m_Shader: {fileID: 4800000, guid: ef3f789ec080a5d49ba657958e7f4306, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5a8fda358f4dcc748ae212c89dafd2f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8123ffa5d8e9ebe49a859560a29e85d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -63,12 +63,12 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Darkness: 0.9
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Intensity: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
