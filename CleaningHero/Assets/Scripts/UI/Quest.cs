@@ -21,10 +21,10 @@ public class Quest : MonoBehaviour
     {
         Q1.text = q1.text;
 
-        // int i;
+        int i = 0;
         // 퍼즐을 먹는다면
         // i++;
-        // q1.text = "퍼즐을 모아라 ( " + i + " / 4 )";
+        q1.text = "퍼즐을 모아라 ( " + i + " / 4 )";
 
         // 무기가 바뀐다면
         //Q2.text = "< color = black>" + "열쇠를 모아라" + "</color>";
