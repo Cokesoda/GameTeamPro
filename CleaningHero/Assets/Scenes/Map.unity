@@ -32,13 +32,13 @@ RenderSettings:
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 1
+  m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45140988, g: 0.50086224, b: 0.57209027, a: 1}
+  m_IndirectSpecularColor: {r: 0.44168714, g: 0.4905874, b: 0.57057434, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -196,7 +196,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!215 &135028784
 ReflectionProbe:
@@ -386,11 +386,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cae439bf51216dd46901f887248ffaaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1075976856}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cae439bf51216dd46901f887248ffaaf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1378240240}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cae439bf51216dd46901f887248ffaaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1378240243}
   m_SourcePrefab: {fileID: 100100000, guid: cae439bf51216dd46901f887248ffaaf, type: 3}
 --- !u!1001 &644080534
 PrefabInstance:
@@ -479,7 +485,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!220 &658918584
 LightProbeGroup:
@@ -1000,15 +1006,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.85
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.966
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.03
+      value: -1.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1240,7 +1246,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 0.3
   m_Range: 13
   m_SpotAngle: 179
   m_InnerSpotAngle: 1
@@ -1413,6 +1419,73 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.65, y: 2, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0.75}
+--- !u!1 &1075976855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075976856}
+  - component: {fileID: 1075976858}
+  - component: {fileID: 1075976857}
+  m_Layer: 0
+  m_Name: PuzzleTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1075976856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075976855}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1249893079}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1075976857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075976855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663608e71b9441c4ea852edc758d5c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzle: {fileID: 1378240243}
+--- !u!65 &1075976858
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075976855}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6, y: 1.5, z: 1.5}
+  m_Center: {x: -0.3, y: 0, z: 0}
 --- !u!4 &1114425423 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f6085eaa27926a04da476ef6471cd16d, type: 3}
@@ -1874,6 +1947,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.586171, y: 0.47708645, z: 1.4768414}
   m_Center: {x: 0, y: -0.23854311, z: -0.038609833}
+--- !u!114 &1378240243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378240237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e19c850526cfd24b8bacc7a3f857ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCheck: 0
+  intensity: 1.8
 --- !u!1001 &1410078674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2041,13 +2128,13 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 5.62e-43, y: 1.3e-44, z: 0, w: 6e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -2060,13 +2147,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432516436}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25119227, y: 0.09207562, z: -0.06532894, w: 0.9613307}
+  m_LocalRotation: {x: 0.52908945, y: 0.107477225, z: -0.034560658, w: 0.8410223}
   m_LocalPosition: {x: -2.112773, y: 12.461401, z: -5.9128766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 676470776}
-  m_LocalEulerAnglesHint: {x: 29.669, y: 9.554, z: -5.24}
+  m_LocalEulerAnglesHint: {x: 63.816, y: 19.076, z: 7.238}
 --- !u!1 &1454245695 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a743816a1474d9408e7dd97ea6b5c0b, type: 3}
@@ -2357,8 +2444,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737602950}
-  - component: {fileID: 1737602951}
   - component: {fileID: 1737602952}
+  - component: {fileID: 1737602953}
   m_Layer: 0
   m_Name: PuzzleTrigger
   m_TagString: Untagged
@@ -2381,27 +2468,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1374220734}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1737602951
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737602949}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.8
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1737602952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,6 +2481,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzle: {fileID: 1374220735}
+--- !u!65 &1737602953
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737602949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7, y: 0.5, z: 0.7}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &1825848462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,6 +2953,10 @@ PrefabInstance:
     - target: {fileID: 6441607721950288188, guid: 12fa710ad7b8e204590f0e1f5095bb4a, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523483382960499345, guid: 12fa710ad7b8e204590f0e1f5095bb4a, type: 3}
+      propertyPath: m_Radius
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 6742844888597295715, guid: 12fa710ad7b8e204590f0e1f5095bb4a, type: 3}
       propertyPath: m_StaticEditorFlags
