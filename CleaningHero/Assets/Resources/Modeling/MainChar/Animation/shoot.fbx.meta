@@ -858,11 +858,7 @@ ModelImporter:
     feetSpacing: 0
     globalScale: 1
     rootMotionBoneName: 
-<<<<<<< Updated upstream:CleaningHero/Assets/Resources/Modeling/MainChar/Animation/shoot.fbx.meta
-    hasTranslationDoF: 0
-=======
     hasTranslationDoF: 1
->>>>>>> Stashed changes:CleaningHero/Assets/Resources/Modeling/MainChar/Animation/shoot_modify.fbx.meta
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
