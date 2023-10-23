@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class StoryScene : MonoBehaviour
 {
     public int SceneNumber;
+    public GameObject StorySceneManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class StoryScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (StorySceneManager.GetComponent<Dialogue>().NextScene == true)
         {
             SceneManager.LoadScene(SceneNumber+1);
         }

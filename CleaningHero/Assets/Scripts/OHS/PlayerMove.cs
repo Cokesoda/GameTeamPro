@@ -13,10 +13,13 @@ public class PlayerMove : MonoBehaviour
     float gravity = -3f;
     float yVelocity = 0;
 
+    Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -27,6 +30,8 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 dir = new Vector3(h, 0, v);
         dir = dir.normalized;
+
+        anim.SetFloat("MoveMotion", dir.magnitude);
         dir = Camera.main.transform.TransformDirection(dir);
 
         if (isJumping && cc.collisionFlags == CollisionFlags.Below)
