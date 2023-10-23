@@ -43,11 +43,15 @@ public class PlayerMove : MonoBehaviour
         }
         if(Input.GetButtonDown("Jump") && !isJumping)
         {
+            /*
+            if (anim.GetFloat("MoveMotion") == 0)
+            {
+                anim.SetTrigger("Jump");
+            }
+            */
             yVelocity = jumpPower / 15;
             isJumping = true;
         }
-        //if (isJumping){}
-
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
         cc.Move(dir * moveSpeed * Time.deltaTime);
