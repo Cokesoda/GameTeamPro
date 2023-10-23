@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LMFSM : MonoBehaviour
+public class enemy2FSM : MonoBehaviour
 {
     GameObject player;
     NavMeshAgent nMa;
@@ -57,7 +57,7 @@ public class LMFSM : MonoBehaviour
         xLMstatus = playerStatus.GetComponent<LMstatus>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
-        nMa.speed = enemyMovespeed;            //몹 이동속도
+        nMa.speed = enemyMovespeed;                         //몹 이동속도
         e_state = EnemyState.Idle;
 
     }
