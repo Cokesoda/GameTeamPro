@@ -257,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 1458463364202937710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -283,7 +283,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.3
-  m_BaseOffset: 0.15
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &390318505552227334
@@ -306,7 +306,7 @@ MonoBehaviour:
   enemyReturnDistance: 1.25
   enemyAttackDamage: 1
   enemyHp: 100
-  enemyAttackspeed: 0.01
+  enemyAttackspeed: 0.87
   enemyMovespeed: 0.652
   enemyHittime: 2
   enemyDietime: 2
@@ -327,15 +327,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001'\n\tTransform 'Bip001 R Foot'\n\tTransform
-    'Bip001 Head'\n\tTransform 'Bip001 R Calf'\n\tTransform 'Bip001 R Thigh'\n\tTransform
-    'Bip001 L Toe0'\n\tTransform 'Bip001'\n\tTransform 'Bip001 L Thigh'\n\tTransform
-    'Bip001 L Foot'\n\tTransform 'Bip001 L Calf'\n\tand more ...\n\tFrom animation
-    clip 'Lego(rig)_idle'\n\tFrom animation clip 'Lego(rig)_walking'\n\tFrom animation
-    clip 'Lego(rig)_attack2'\n\tFrom animation clip 'Lego(rig)_attack'\n\tFrom animation
-    clip 'Lego(rig)_damage'\n\tFrom animation clip 'Lego(rig)_die'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -566,7 +558,7 @@ Transform:
   m_GameObject: {fileID: 3857827323115841998}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
