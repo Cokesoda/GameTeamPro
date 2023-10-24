@@ -18,10 +18,10 @@ public class PlayerMove : MonoBehaviour
     public GameObject hitEffect;
     Animator anim;
 
-    private float range;
-    private bool pickupActivated = false;
     private RaycastHit hitInfo;
-    private LayerMask layerMask;
+    //private float range;
+    //private bool pickupActivated = false;
+    //private LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +33,11 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
