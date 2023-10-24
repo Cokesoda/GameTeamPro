@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45140988, g: 0.50086224, b: 0.57209027, a: 1}
+  m_IndirectSpecularColor: {r: 0.44168714, g: 0.4905874, b: 0.57057434, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1476,6 +1476,8 @@ MonoBehaviour:
   moveSpeed: 1
   jumpPower: 10
   isJumping: 0
+  hp: 20
+  hitEffect: {fileID: 0}
 --- !u!143 &988410307
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2580,6 +2582,7 @@ Transform:
   - {fileID: 675158783}
   - {fileID: 1225473941}
   - {fileID: 786260223}
+  - {fileID: 8629255002542281029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1707234700
@@ -3277,6 +3280,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1814318232369908546, guid: e6eacc8464fd91e48a8afbce288e9690, type: 3}
   m_PrefabInstance: {fileID: 4931452474626199897}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4726195595988526979
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1525258746}
+    m_Modifications:
+    - target: {fileID: 2569568503725241367, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_Name
+      value: '[fbx]table'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.393
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.274
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
 --- !u!1001 &4931452474626199897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3358,6 +3418,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7783546279165433508, guid: e6eacc8464fd91e48a8afbce288e9690, type: 3}
   m_PrefabInstance: {fileID: 4931452474626199897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8629255002542281029 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5262515053253783248, guid: c532a55b526e5f24a94b08d21eb80ff0, type: 3}
+  m_PrefabInstance: {fileID: 4726195595988526979}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
