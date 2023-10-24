@@ -8,6 +8,8 @@ TagManager:
   - Enemy1
   - Enemy2
   - Bullet
+  - ToyBox
+  - Pillow
   layers:
   - Default
   - TransparentFX
