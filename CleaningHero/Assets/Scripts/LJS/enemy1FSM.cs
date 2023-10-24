@@ -120,7 +120,11 @@ public class enemy1FSM : MonoBehaviour
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
         transform.LookAt(player.transform);
-        if (targetTrackingdistance < enemyAttackDistance)
+        if (isHit)
+        {
+            
+        }
+        else if (targetTrackingdistance < enemyAttackDistance)
             //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
@@ -128,7 +132,7 @@ public class enemy1FSM : MonoBehaviour
             e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
-        if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
+        else if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
             //이동중 복귀거리 이상 이동한 경우
         {
             canAttack = false;
@@ -148,7 +152,7 @@ public class enemy1FSM : MonoBehaviour
         {
             legoAni.SetInteger("ranAttack",UnityEngine.Random.Range(1, 3));
             canAttack = false;
-            Instantiate(bulletObj,shotPos.position,shotPos.rotation);
+            //Instantiate(bulletObj,shotPos.position,shotPos.rotation);
             
             yield return new WaitForSeconds(enemyAttackspeed);
             if (targetTrackingdistance < enemyAttackDistance)
