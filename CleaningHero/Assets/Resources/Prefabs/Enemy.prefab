@@ -327,7 +327,15 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Bip001'\n\tTransform 'Bip001 R Foot'\n\tTransform
+    'Bip001 Head'\n\tTransform 'Bip001 R Calf'\n\tTransform 'Bip001 R Thigh'\n\tTransform
+    'Bip001 L Toe0'\n\tTransform 'Bip001'\n\tTransform 'Bip001 L Thigh'\n\tTransform
+    'Bip001 L Foot'\n\tTransform 'Bip001 L Calf'\n\tand more ...\n\tFrom animation
+    clip 'Lego(rig)_idle'\n\tFrom animation clip 'Lego(rig)_walking'\n\tFrom animation
+    clip 'Lego(rig)_attack2'\n\tFrom animation clip 'Lego(rig)_attack'\n\tFrom animation
+    clip 'Lego(rig)_damage'\n\tFrom animation clip 'Lego(rig)_die'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
