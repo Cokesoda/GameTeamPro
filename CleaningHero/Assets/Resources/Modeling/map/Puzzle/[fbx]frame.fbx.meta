@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:CleaningHero/Assets/Resources/Modeling/map/Puzzle/[fbx]frame.fbx.meta
 guid: d343bdb2997305c4583c12a9e69d81a2
+========
+guid: 2fc9b25439018ee4bb4103f422c05595
+>>>>>>>> JeaSeong:CleaningHero/Assets/Resources/Modeling/MainChar/Animation/Rig/MainChar(mini_rig).fbx.meta
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -48,7 +52,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

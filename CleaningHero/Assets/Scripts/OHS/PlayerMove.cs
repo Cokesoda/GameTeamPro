@@ -7,12 +7,14 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 2/40f;
     public float jumpPower = 4f;
     public bool isJumping = false;
+    public int hp = 20;
 
     CharacterController cc;
 
     float gravity = -3f;
     float yVelocity = 0;
 
+    public GameObject hitEffect;
     Animator anim;
 
     // Start is called before the first frame update
@@ -41,13 +43,34 @@ public class PlayerMove : MonoBehaviour
         }
         if(Input.GetButtonDown("Jump") && !isJumping)
         {
+            /*
+            if (anim.GetFloat("MoveMotion") == 0)
+            {
+                anim.SetTrigger("Jump");
+            }
+            */
             yVelocity = jumpPower / 15;
             isJumping = true;
         }
-        //if (isJumping){}
-
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
         cc.Move(dir * moveSpeed * Time.deltaTime);
+    }
+
+    public void DamageAction(int damage)
+    {
+        hp -= damage;
+
+        if (hp > 0)
+        {
+            StartCoroutine(PlayHitEffect());
+        }
+    }
+
+    IEnumerator PlayHitEffect()
+    {
+        hitEffect.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        hitEffect.SetActive(false);
     }
 }

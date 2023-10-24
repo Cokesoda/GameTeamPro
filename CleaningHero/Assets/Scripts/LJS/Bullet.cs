@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public GameObject player;
     public GameObject enemy;
-    LMFSM enemyStatus;
+    enemy2FSM enemyStatus;
     GameObject playerStatus;
     LMstatus xLMstatus;
     string colliderName;
@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     {
         playerStatus = GameObject.Find("GameManager");
         xLMstatus = playerStatus.GetComponent<LMstatus>();
-        enemyStatus = enemy.GetComponent<LMFSM>();
+        enemyStatus = enemy.GetComponent<enemy2FSM>();
         Lrb = GetComponent<Rigidbody>();
         Lrb.AddRelativeForce(0, 100, 0);
     }
