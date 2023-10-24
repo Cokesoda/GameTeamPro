@@ -70,6 +70,10 @@ public class PlayerMove : MonoBehaviour
     IEnumerator PlayHitEffect()
     {
         hitEffect.SetActive(true);
+        if (anim.GetFloat("MoveMotion") == 0)
+        {
+            anim.SetTrigger("Damage");
+        }
         yield return new WaitForSeconds(0.3f);
         hitEffect.SetActive(false);
     }
