@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 1/40f;
+    public float moveSpeed = 1/80f;
     public float jumpPower = 4f;
     public bool isJumping = false;
     public int hp = 20;
@@ -80,6 +80,10 @@ public class PlayerMove : MonoBehaviour
             {
                 Interaction("Pillow");
             }
+            if (hitInfo.transform.tag == "Book")
+            {
+                Interaction("Book");
+            }
         }
     }
 
@@ -92,6 +96,11 @@ public class PlayerMove : MonoBehaviour
                 break;
             case "Pillow":
                 Debug.Log("======================= " + inter);
+                break;
+            case "Book":
+                Debug.Log("======================= " + inter);
+                break;
+            default:
                 break;
 
         }
