@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour
 {
-    public float rotSpeed = 200;
+    public float rotSpeed = 50;
     float mx = 0;
 
     // Start is called before the first frame update
