@@ -6,6 +6,7 @@ public class PlayerFire : MonoBehaviour
 {
     public GameObject firePosition;
     public GameObject wBulletEffect;
+    public bool isHit = false;
 
     ParticleSystem ps;
 
@@ -21,6 +22,11 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if (anim.GetFloat("MoveMotion") == 0)
@@ -32,15 +38,24 @@ public class PlayerFire : MonoBehaviour
             RaycastHit hitInfo = new RaycastHit();
             if(Physics.Raycast(firePosition.transform.position, Camera.main.transform.forward, out hitInfo, 100))
             {
-                //transform.TransformDirection(Vector3.forward)
-                //Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward * hitInfo.distance, Color.yellow);
-                wBulletEffect.transform.position = hitInfo.point;
-                wBulletEffect.transform.forward = hitInfo.normal;
-                ps.Play();
-                //ps.Stop();
-                //Destroy(ps, 0.1f);
+                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    isHit = true;
+                    Debug.Log("======================== " + isHit);
+                    //EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
+                    //eFSM.HitEnemy(weaponPower);
+                }
+                else
+                {
+                    //transform.TransformDirection(Vector3.forward)
+                    //Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward * hitInfo.distance, Color.yellow);
+                    wBulletEffect.transform.position = hitInfo.point;
+                    wBulletEffect.transform.forward = hitInfo.normal;
+                    ps.Play();
+                    //ps.Stop();
+                    //Destroy(ps, 0.1f);
+                }
             }
-
         }
     }
 }
