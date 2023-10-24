@@ -16,22 +16,22 @@ public class enemy1FSM : MonoBehaviour
 
     //LMstatus statusScript;
     [Range(5, 0.1f)]
-    public float enemyFindDistance = 0.5f;   //Àû ÀÎ½Ä °Å¸®
+    public float enemyFindDistance = 0.5f;   //ì  ì¸ì‹ ê±°ë¦¬
     [Range(5, 0.1f)]
-    public float enemyAttackDistance = 1;    //Àû °ø°İ °Å¸®
+    public float enemyAttackDistance = 1;    //ì  ê³µê²© ê±°ë¦¬
     [Range(5, 0.1f)]
-    public float enemyReturnDistance = 1.5f; //Àû º¹±Í °Å¸®
+    public float enemyReturnDistance = 1.5f; //ì  ë³µê·€ ê±°ë¦¬
 
-    public float enemyAttackDamage = 1;      //Àû °ø°İ·Â
-    public float enemyHp = 100;              //Àû Ã¼·Â
-    public float enemyAttackspeed = 0.01f;   //Àû °ø°İ ¼Óµµ(ÃÊ)
+    public float enemyAttackDamage = 1;      //ì  ê³µê²©ë ¥
+    public float enemyHp = 100;              //ì  ì²´ë ¥
+    public float enemyAttackspeed = 0.01f;   //ì  ê³µê²© ì†ë„(ì´ˆ)
     [Range(1,0.1f)]
-    public float enemyMovespeed = 5;         //Àû ÀÌµ¿ ¼Óµµ
-    public float enemyHittime = 2f;          //Àû ÇÇ°İ ½Ã°£(ÃÊ)
-    public float enemyDietime = 2f;          //Àû Á×´Â ½Ã°£(ÃÊ)
+    public float enemyMovespeed = 5;         //ì  ì´ë™ ì†ë„
+    public float enemyHittime = 2f;          //ì  í”¼ê²© ì‹œê°„(ì´ˆ)
+    public float enemyDietime = 2f;          //ì  ì£½ëŠ” ì‹œê°„(ì´ˆ)
 
     float targetTrackingdistance;
-    Vector3 originalPos;                     //±âÁ¸ »ı¼ºÀ§Ä¡ Æ÷Áö¼Ç °ª
+    Vector3 originalPos;                     //ê¸°ì¡´ ìƒì„±ìœ„ì¹˜ í¬ì§€ì…˜ ê°’
 
     public float currentTime = 0;
     bool canAttack = false;
@@ -55,9 +55,9 @@ public class enemy1FSM : MonoBehaviour
         nMa = GetComponent<NavMeshAgent>();
         playerStatus = GameObject.Find("GameManager");
         xLMstatus = playerStatus.GetComponent<LMstatus>();
-        player = GameObject.FindGameObjectWithTag("Player");//¸ŞÀÎ Ä³¸¯ÅÍ ¿ÀºêÁ§Æ® ÀÌ¸§ º¯°æ *Áß¿ä
-        originalPos = transform.position;                   //»ı¼ºµÈ À§Ä¡¸¦ ÃÊ±âÀ§Ä¡·Î ÀúÀå
-        nMa.speed = enemyMovespeed;                         //¸÷ ÀÌµ¿¼Óµµ
+        player = GameObject.FindGameObjectWithTag("Player");//ë©”ì¸ ìºë¦­í„° ì˜¤ë¸Œì íŠ¸ ì´ë¦„ ë³€ê²½ *ì¤‘ìš”
+        originalPos = transform.position;                   //ìƒì„±ëœ ìœ„ì¹˜ë¥¼ ì´ˆê¸°ìœ„ì¹˜ë¡œ ì €ì¥
+        nMa.speed = enemyMovespeed;                         //ëª¹ ì´ë™ì†ë„
         e_state = EnemyState.Idle;
 
     }
@@ -106,7 +106,7 @@ public class enemy1FSM : MonoBehaviour
         print("Idle");
         //Animation(IdlePlay);
         if(targetTrackingdistance < enemyFindDistance)
-            //ÇÃ·¹ÀÌ¾î°¡ ÀÎ½Ä°Å¸®¿¡ µé¾î¿Â °æ¿ì
+            //í”Œë ˆì´ì–´ê°€ ì¸ì‹ê±°ë¦¬ì— ë“¤ì–´ì˜¨ ê²½ìš°
         {
             transform.LookAt(player.transform);
             e_state = EnemyState.Move;
@@ -118,18 +118,18 @@ public class enemy1FSM : MonoBehaviour
         print("Move");
         nMa.SetDestination(player.transform.position);
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
-        //°ø°İ°Å¸®ÀÇ -0.09±îÁö °¡¼­ ¸ØÃã
+        //ê³µê²©ê±°ë¦¬ì˜ -0.09ê¹Œì§€ ê°€ì„œ ë©ˆì¶¤
         transform.LookAt(player.transform);
         if (targetTrackingdistance < enemyAttackDistance)
-            //ÇÃ·¹ÀÌ¾î°¡ °ø°İ°Å¸®³»¿¡ µé¾î¿Â °æ¿ì
+            //í”Œë ˆì´ì–´ê°€ ê³µê²©ê±°ë¦¬ë‚´ì— ë“¤ì–´ì˜¨ ê²½ìš°
         {
             print("Move > Attack");
             canAttack = true;
             e_state = EnemyState.Attack;
         }
-        //ÃÊ±â À§Ä¡¿¡¼­ ¹ş¾î³­ °æ¿ì
+        //ì´ˆê¸° ìœ„ì¹˜ì—ì„œ ë²—ì–´ë‚œ ê²½ìš°
         if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
-            //ÀÌµ¿Áß º¹±Í°Å¸® ÀÌ»ó ÀÌµ¿ÇÑ °æ¿ì
+            //ì´ë™ì¤‘ ë³µê·€ê±°ë¦¬ ì´ìƒ ì´ë™í•œ ê²½ìš°
         {
             canAttack = false;
             nMa.stoppingDistance = 0.001f;
@@ -140,11 +140,11 @@ public class enemy1FSM : MonoBehaviour
     void state_Attack()
     {
         transform.LookAt(player.transform);
-        StartCoroutine(eAttack());                                      //°ø°İ ¾Ö´Ï¸ŞÀÌ¼ÇÃß°¡
+        StartCoroutine(eAttack());                                      //ê³µê²© ì• ë‹ˆë©”ì´ì…˜ì¶”ê°€
     }
     IEnumerator eAttack()
     {
-        if (canAttack)//°ø°İ °¡´ÉÇÑ °æ¿ì
+        if (canAttack)//ê³µê²© ê°€ëŠ¥í•œ ê²½ìš°
         {
             canAttack = false;
 
@@ -153,7 +153,7 @@ public class enemy1FSM : MonoBehaviour
             yield return new WaitForSeconds(enemyAttackspeed);
             if (targetTrackingdistance < enemyAttackDistance)
             {
-                //°ø°İ()
+                //ê³µê²©()
                 canAttack = true;
             }
             else if(targetTrackingdistance > enemyAttackDistance)
@@ -171,7 +171,7 @@ public class enemy1FSM : MonoBehaviour
         nMa.ResetPath();
         nMa.SetDestination(originalPos);
 
-        //º¹±ÍÈÄ idle»óÅÂ·Î º¯°æÁ¶°Ç                                                    
+        //ë³µê·€í›„ idleìƒíƒœë¡œ ë³€ê²½ì¡°ê±´                                                    
         if(Vector3.Distance(transform.position,originalPos)<0.2f)
         {
             nMa.isStopped = true;
@@ -195,17 +195,19 @@ public class enemy1FSM : MonoBehaviour
     }
     IEnumerator hitstate()
     {
-        //AnimationPlay(ÇÇ°İ);
+        //AnimationPlay(í”¼ê²©);
         yield return new WaitForSeconds(enemyHittime);
         e_state = EnemyState.Move;
     }
     private void state_Die()
     {
-        //AnimationPlay(Á×À½);
+        //AnimationPlay(ì£½ìŒ);
         StartCoroutine(EnemyDiestate());
     }
     IEnumerator EnemyDiestate()
     {
+		//test
+		StartCoroutine;
         yield return new WaitForSeconds(enemyDietime);
         Destroy(gameObject);
     }
