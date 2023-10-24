@@ -13,6 +13,7 @@ public class enemy1FSM : MonoBehaviour
     public Transform shotPos2;
     GameObject playerStatus;
     LMstatus xLMstatus;
+    Animator legoAni;
 
     //LMstatus statusScript;
     [Range(5, 0.1f)]
@@ -55,11 +56,11 @@ public class enemy1FSM : MonoBehaviour
         nMa = GetComponent<NavMeshAgent>();
         playerStatus = GameObject.Find("GameManager");
         xLMstatus = playerStatus.GetComponent<LMstatus>();
-        player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
+        player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;                         //몹 이동속도
         e_state = EnemyState.Idle;
-
+        legoAni = GetComponent<Animator>();
     }
 
     private void OnDrawGizmos()
@@ -104,7 +105,6 @@ public class enemy1FSM : MonoBehaviour
     void state_Idle()
     {
         print("Idle");
-        //Animation(IdlePlay);
         if(targetTrackingdistance < enemyFindDistance)
             //플레이어가 인식거리에 들어온 경우
         {
@@ -115,7 +115,7 @@ public class enemy1FSM : MonoBehaviour
     }
     void state_Move()
     {
-        print("Move");
+        legoAni.SetTrigger("Lego_Walking");
         nMa.SetDestination(player.transform.position);
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
@@ -146,8 +146,8 @@ public class enemy1FSM : MonoBehaviour
     {
         if (canAttack)//공격 가능한 경우
         {
+            legoAni.SetInteger("ranAttack",UnityEngine.Random.Range(1, 3));
             canAttack = false;
-
             Instantiate(bulletObj,shotPos.position,shotPos.rotation);
             
             yield return new WaitForSeconds(enemyAttackspeed);
@@ -206,8 +206,7 @@ public class enemy1FSM : MonoBehaviour
     }
     IEnumerator EnemyDiestate()
     {
-		//test
-		StartCoroutine;
+        
         yield return new WaitForSeconds(enemyDietime);
         Destroy(gameObject);
     }
