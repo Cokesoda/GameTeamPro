@@ -18,10 +18,10 @@ public class PlayerMove : MonoBehaviour
     public GameObject hitEffect;
     Animator anim;
 
-    private float range;
-    private bool pickupActivated = false;
     private RaycastHit hitInfo;
-    private LayerMask layerMask;
+    //private float range;
+    //private bool pickupActivated = false;
+    //private LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
