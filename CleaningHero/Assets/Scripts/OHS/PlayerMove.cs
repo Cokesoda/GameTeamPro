@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 2/40f;
+    public float moveSpeed = 1/40f;
     public float jumpPower = 4f;
     public bool isJumping = false;
     public int hp = 20;
@@ -16,6 +17,11 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject hitEffect;
     Animator anim;
+
+    private float range;
+    private bool pickupActivated = false;
+    private RaycastHit hitInfo;
+    private LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +42,10 @@ public class PlayerMove : MonoBehaviour
         anim.SetFloat("MoveMotion", dir.magnitude);
         dir = Camera.main.transform.TransformDirection(dir);
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            InteractionCtrl();
+        }
         if (isJumping && cc.collisionFlags == CollisionFlags.Below)
         {
             isJumping = false;
@@ -55,6 +65,36 @@ public class PlayerMove : MonoBehaviour
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
         cc.Move(dir * moveSpeed * Time.deltaTime);
+    }
+
+    private void InteractionCtrl()
+    {
+        //if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo))
+        {
+            if (hitInfo.transform.tag == "ToyBox")
+            {
+                Interaction("ToyBox");
+            }
+            if (hitInfo.transform.tag == "Pillow")
+            {
+                Interaction("Pillow");
+            }
+        }
+    }
+
+    private void Interaction(string inter)
+    {
+        switch (inter)
+        {
+            case "ToyBox":
+                Debug.Log("======================= " + inter);
+                break;
+            case "Pillow":
+                Debug.Log("======================= " + inter);
+                break;
+
+        }
     }
 
     public void DamageAction(int damage)
