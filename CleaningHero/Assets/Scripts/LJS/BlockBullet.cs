@@ -19,7 +19,7 @@ public class BlockBullet : MonoBehaviour
         xLMstatus = playerStatus.GetComponent<LMstatus>();
         enemyStatus = enemy.GetComponent<enemy1FSM>();
         Lrb = GetComponent<Rigidbody>();
-        Lrb.AddRelativeForce(-250, 0, 0);
+        Lrb.AddRelativeForce(0,-1,20);
     }
     void OnCollisionEnter(Collision collision) //다른 오브젝트와 충돌했을 경우
     {

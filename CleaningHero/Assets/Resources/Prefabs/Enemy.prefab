@@ -93,8 +93,7 @@ Transform:
   m_LocalPosition: {x: -0.04818479, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6784668343904004624}
+  m_Children: []
   m_Father: {fileID: 4816205076758126809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &526733654342252494
@@ -241,6 +240,7 @@ GameObject:
   - component: {fileID: 9152524685633420899}
   - component: {fileID: 390318505552227334}
   - component: {fileID: 3628072361505899552}
+  - component: {fileID: 471900051424130584}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy1
@@ -261,6 +261,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3860293758125129426}
+  - {fileID: 6784668343904004624}
   - {fileID: 4522195865731724148}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -332,6 +334,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &471900051424130584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458463364202937710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ad17327a3aca844a82708343dc49ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletObj: {fileID: 3356717609026953662, guid: 397a4a75bbd65ea4f954971f39e99d2c, type: 3}
+  shotPos1: {fileID: 3860293758125129426}
+  shotPos2: {fileID: 6784668343904004624}
 --- !u!1 &1575544450826422433
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,9 +689,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3860293758125129426}
   m_Layer: 0
-  m_Name: shotPos
+  m_Name: LshotPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -687,11 +704,11 @@ Transform:
   m_GameObject: {fileID: 5694128568396918685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.035, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3859108331808984907}
+  m_Father: {fileID: 1830906616321166983}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5820522510730877012
 GameObject:
@@ -894,9 +911,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6784668343904004624}
   m_Layer: 0
-  m_Name: shotPos
+  m_Name: RshotPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -909,11 +926,11 @@ Transform:
   m_GameObject: {fileID: 6772707267341690738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.035, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7057393795734693419}
+  m_Father: {fileID: 1830906616321166983}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6961696337130589267
 GameObject:
@@ -1166,7 +1183,6 @@ Transform:
   m_LocalPosition: {x: -0.04818478, y: -0.000000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3860293758125129426}
+  m_Children: []
   m_Father: {fileID: 4031891649900650320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
