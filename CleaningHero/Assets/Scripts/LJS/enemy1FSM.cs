@@ -120,11 +120,8 @@ public class enemy1FSM : MonoBehaviour
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
         transform.LookAt(player.transform);
-        if (isHit)
-        {
-            
-        }
-        else if (targetTrackingdistance < enemyAttackDistance)
+        
+        if (targetTrackingdistance < enemyAttackDistance)
             //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
