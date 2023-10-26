@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 2/40f;
+    public float moveSpeed = 1/80f;
     public float jumpPower = 4f;
     public bool isJumping = false;
     public int hp = 20;
@@ -17,6 +18,11 @@ public class PlayerMove : MonoBehaviour
     public GameObject hitEffect;
     Animator anim;
 
+    private RaycastHit hitInfo;
+    //private float range;
+    //private bool pickupActivated = false;
+    //private LayerMask layerMask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +33,11 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -36,6 +47,10 @@ public class PlayerMove : MonoBehaviour
         anim.SetFloat("MoveMotion", dir.magnitude);
         dir = Camera.main.transform.TransformDirection(dir);
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            InteractionCtrl();
+        }
         if (isJumping && cc.collisionFlags == CollisionFlags.Below)
         {
             isJumping = false;
@@ -57,6 +72,45 @@ public class PlayerMove : MonoBehaviour
         cc.Move(dir * moveSpeed * Time.deltaTime);
     }
 
+    private void InteractionCtrl()
+    {
+        //if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo))
+        {
+            if (hitInfo.transform.tag == "ToyBox")
+            {
+                Interaction("ToyBox");
+            }
+            if (hitInfo.transform.tag == "Pillow")
+            {
+                Interaction("Pillow");
+            }
+            if (hitInfo.transform.tag == "Book")
+            {
+                Interaction("Book");
+            }
+        }
+    }
+
+    private void Interaction(string inter)
+    {
+        switch (inter)
+        {
+            case "ToyBox":
+                Debug.Log("======================= " + inter);
+                break;
+            case "Pillow":
+                Debug.Log("======================= " + inter);
+                break;
+            case "Book":
+                Debug.Log("======================= " + inter);
+                break;
+            default:
+                break;
+
+        }
+    }
+
     public void DamageAction(int damage)
     {
         hp -= damage;
@@ -70,6 +124,10 @@ public class PlayerMove : MonoBehaviour
     IEnumerator PlayHitEffect()
     {
         hitEffect.SetActive(true);
+        if (anim.GetFloat("MoveMotion") == 0)
+        {
+            anim.SetTrigger("Damage");
+        }
         yield return new WaitForSeconds(0.3f);
         hitEffect.SetActive(false);
     }

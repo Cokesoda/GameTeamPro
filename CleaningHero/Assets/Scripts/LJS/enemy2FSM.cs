@@ -9,9 +9,10 @@ public class enemy2FSM : MonoBehaviour
     GameObject player;
     NavMeshAgent nMa;
     public GameObject bulletObj;
-    public Transform shotPos;
+    GameObject shotPos;
     GameObject playerStatus;
     LMstatus xLMstatus;
+    Animator bossAni;
 
     //LMstatus statusScript;
     [Range(5, 0.1f)]
@@ -59,7 +60,8 @@ public class enemy2FSM : MonoBehaviour
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;                         //몹 이동속도
         e_state = EnemyState.Idle;
-
+        bossAni = GetComponent<Animator>();
+        shotPos = GameObject.Find("bossShotpos");
     }
 
     private void OnDrawGizmos()
@@ -104,7 +106,6 @@ public class enemy2FSM : MonoBehaviour
     void state_Idle()
     {
         print("Idle");
-        //Animation(IdlePlay);
         if(targetTrackingdistance < enemyFindDistance)
             //플레이어가 인식거리에 들어온 경우
         {
@@ -115,8 +116,8 @@ public class enemy2FSM : MonoBehaviour
     }
     void state_Move()
     {
-        print("Move");
         nMa.SetDestination(player.transform.position);
+        bossAni.SetTrigger("Boss_Walking");
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
         transform.LookAt(player.transform);
@@ -149,7 +150,7 @@ public class enemy2FSM : MonoBehaviour
         {
             canAttack = false;
 
-            Instantiate(bulletObj,shotPos.position,shotPos.rotation);
+            Instantiate(bulletObj,shotPos.transform.position,shotPos.transform.rotation);
             
             yield return new WaitForSeconds(enemyAttackspeed);
             if (targetTrackingdistance < enemyAttackDistance)

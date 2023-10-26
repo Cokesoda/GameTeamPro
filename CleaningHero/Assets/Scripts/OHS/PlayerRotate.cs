@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour
 {
-    public float rotSpeed = 200;
+    public float rotSpeed = 50;
     float mx = 0;
 
     // Start is called before the first frame update
@@ -16,6 +16,12 @@ public class PlayerRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+        {
+            return;
+        }*/
+
         float mouse_X = Input.GetAxis("Mouse X");
         mx += mouse_X * rotSpeed * Time.deltaTime;
 
