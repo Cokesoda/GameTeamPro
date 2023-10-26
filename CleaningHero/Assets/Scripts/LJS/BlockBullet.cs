@@ -6,7 +6,7 @@ public class BlockBullet : MonoBehaviour
 {
     public GameObject player;
     public GameObject enemy;
-    enemy1FSM enemyStatus;
+    Enemy1FSM enemyStatus;
     GameObject playerStatus;
     LMstatus xLMstatus;
     string colliderName;
@@ -17,7 +17,7 @@ public class BlockBullet : MonoBehaviour
     {
         playerStatus = GameObject.Find("GameManager");
         xLMstatus = playerStatus.GetComponent<LMstatus>();
-        enemyStatus = enemy.GetComponent<enemy1FSM>();
+        enemyStatus = enemy.GetComponent<Enemy1FSM>();
         Lrb = GetComponent<Rigidbody>();
         Lrb.AddRelativeForce(0,-1,20);
     }

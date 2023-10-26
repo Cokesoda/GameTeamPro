@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class hpBillboard : MonoBehaviour
+public class HpBillboard : MonoBehaviour
 {
     GameObject target;
 
