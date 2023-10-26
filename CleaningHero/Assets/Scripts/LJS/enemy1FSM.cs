@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class enemy1FSM : MonoBehaviour
+public class Enemy1FSM : MonoBehaviour
 {
     GameObject player;
     NavMeshAgent nMa;
@@ -13,7 +13,6 @@ public class enemy1FSM : MonoBehaviour
     public Transform shotPos;
     public Transform shotPos2;
     GameObject playerStatus;
-    LMstatus xLMstatus;
     Animator legoAni;
     public Slider enemyHpSlider;
 
@@ -50,8 +49,7 @@ public class enemy1FSM : MonoBehaviour
         Attack,
         Return,
         Hit,
-        Die,
-        Finded
+        Die
     }
 
     
@@ -59,7 +57,6 @@ public class enemy1FSM : MonoBehaviour
     {
         nMa = GetComponent<NavMeshAgent>();
         playerStatus = GameObject.Find("GameManager");
-        xLMstatus = playerStatus.GetComponent<LMstatus>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;                         //몹 이동속도
@@ -169,7 +166,7 @@ public class enemy1FSM : MonoBehaviour
         Vector3 targetDir = player.transform.position - transform.position;
         targetDir.y = 0;
         transform.rotation = Quaternion.LookRotation(targetDir);
-        StartCoroutine(eAttack());                                      //공격 애니메이션추가
+        StartCoroutine(eAttack());                                      
     }
     IEnumerator eAttack()
     {
