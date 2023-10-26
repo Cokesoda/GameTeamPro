@@ -32,6 +32,7 @@ public class PlayerFire : MonoBehaviour
             if (anim.GetFloat("MoveMotion") == 0)
             {
                 anim.SetTrigger("Attack");
+                anim.SetFloat("AttackSpeed", 2f);
             }
             //Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
