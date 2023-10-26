@@ -46,13 +46,13 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
+      loopBlendOrientation: 0
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
@@ -288,18 +288,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Lego_idle(Clone)
+    - name: Lego_Idle(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0.0000015011284, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Lego_Mob
-      parentName: Lego_idle(Clone)
+      parentName: Lego_Idle(Clone)
       position: {x: -0, y: 0.118599996, z: 0.0000000052259566}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 0.075094, y: 0.075094, z: 0.075094}
     - name: Bip001
-      parentName: Lego_idle(Clone)
+      parentName: Lego_Idle(Clone)
       position: {x: -0, y: 0.08528836, z: 0}
       rotation: {x: -0.5000004, y: 0.4999997, z: 0.49999964, w: 0.5000003}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
