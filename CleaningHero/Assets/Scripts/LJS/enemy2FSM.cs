@@ -11,12 +11,10 @@ public class Enemy2FSM : MonoBehaviour
     NavMeshAgent nMa;
     public GameObject bulletObj;
     public Transform shotPos;
-    GameObject playerStatus;
     Animator legoAni;
     public Slider enemyHpSlider;
 
     public bool isHit = false;
-
 
     [Range(5, 0.1f)]
     public float enemyFindDistance = 0.5f;   //적 인식 거리
@@ -55,7 +53,6 @@ public class Enemy2FSM : MonoBehaviour
     void Start()
     {
         nMa = GetComponent<NavMeshAgent>();
-        playerStatus = GameObject.Find("GameManager");
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;                         //몹 이동속도
@@ -85,30 +82,30 @@ public class Enemy2FSM : MonoBehaviour
         switch (e_state)
         {
             case EnemyState.Idle:
-                state_Idle();
+                State_Idle();
                 break;
             case EnemyState.Move:
-                state_Move();
+                State_Move();
                 break;
             case EnemyState.Attack:
-                state_Attack();
+                State_Attack();
                 break;
             case EnemyState.Return:
-                state_Return();
+                State_Return();
                 break;
             case EnemyState.Hit:
-                state_Hit();
+                State_Hit();
                 break;
             case EnemyState.Die:
-                state_Die();
+                State_Die();
                 break;
         }
     }
 
 
-    void state_Idle()
+    void State_Idle()
     {
-        legoAni.SetTrigger("Lego_Idle");
+        legoAni.SetTrigger("Boss_Idle");
         print("Idle");
         if (targetTrackingdistance < enemyFindDistance)
         //플레이어가 인식거리에 들어온 경우
@@ -133,9 +130,9 @@ public class Enemy2FSM : MonoBehaviour
             }
         }
     }
-    void state_Move()
+    void State_Move()
     {
-        legoAni.SetTrigger("Lego_Walking");
+        legoAni.SetTrigger("Boss_Walking");
         nMa.SetDestination(player.transform.position);
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
@@ -160,20 +157,18 @@ public class Enemy2FSM : MonoBehaviour
         }
     }
 
-    void state_Attack()
+    void State_Attack()
     {
         Vector3 targetDir = player.transform.position - transform.position;
         targetDir.y = 0;
         transform.rotation = Quaternion.LookRotation(targetDir);
-        StartCoroutine(eAttack());
+        StartCoroutine(EAttack());
     }
-    IEnumerator eAttack()
+    IEnumerator EAttack()
     {
         if (canAttack)//공격 가능한 경우
         {
-            int ranattack = UnityEngine.Random.Range(1, 3);
-            legoAni.SetTrigger("Lego_Attack");
-            legoAni.SetInteger("ranAttack", ranattack);
+            legoAni.SetTrigger("Boss_Attack");
             canAttack = false;
             yield return new WaitForSeconds(enemyAttackspeed);
             //공격 범위에 들어온 경우
@@ -190,9 +185,9 @@ public class Enemy2FSM : MonoBehaviour
             }
         }
     }
-    void state_Return()
+    void State_Return()
     {
-        legoAni.SetTrigger("Lego_Walking");
+        legoAni.SetTrigger("Boss_Walking");
         print("Return");
         nMa.isStopped = true;
         nMa.ResetPath();
@@ -208,11 +203,11 @@ public class Enemy2FSM : MonoBehaviour
         }
     }
 
-    public void state_Hit()
+    public void State_Hit()
     {
         if (enemyHp > 0)
         {
-            StartCoroutine(hitState());
+            StartCoroutine(HitState());
             e_state = EnemyState.Move;
         }
         else
@@ -220,18 +215,18 @@ public class Enemy2FSM : MonoBehaviour
             e_state = EnemyState.Die;
         }
     }
-    IEnumerator hitState()
+    IEnumerator HitState()
     {
-        legoAni.SetTrigger("Lego_Hit");
+        legoAni.SetTrigger("Boss_Hit");
         yield return new WaitForSeconds(enemyHittime);
     }
-    private void state_Die()
+    private void State_Die()
     {
-        StartCoroutine(dieState());
+        StartCoroutine(DieState());
     }
-    IEnumerator dieState()
+    IEnumerator DieState()
     {
-        legoAni.SetTrigger("Lego_Die");
+        legoAni.SetTrigger("Boss_Die");
         yield return new WaitForSeconds(enemyDietime);
         Destroy(gameObject);
     }

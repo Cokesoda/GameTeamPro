@@ -86,28 +86,28 @@ public class Enemy1FSM : MonoBehaviour
         switch (e_state)
         {
             case EnemyState.Idle:
-                state_Idle();
+                State_Idle();
                 break;
             case EnemyState.Move:
-                state_Move();
+                State_Move();
                 break;
             case EnemyState.Attack:
-                state_Attack();
+                State_Attack();
                 break;
             case EnemyState.Return:
-                state_Return();
+                State_Return();
                 break;
             case EnemyState.Hit:
-                state_Hit();
+                State_Hit();
                 break;
             case EnemyState.Die:
-                state_Die();
+                State_Die();
                 break;
         }
     }
 
 
-    void state_Idle()
+    void State_Idle()
     {
         legoAni.SetTrigger("Lego_Idle");
         print("Idle");
@@ -134,7 +134,7 @@ public class Enemy1FSM : MonoBehaviour
             }
         }
     }
-    void state_Move()
+    void State_Move()
     {
         legoAni.SetTrigger("Lego_Walking");
         nMa.SetDestination(player.transform.position);
@@ -161,14 +161,14 @@ public class Enemy1FSM : MonoBehaviour
         }
     }
     
-    void state_Attack()
+    void State_Attack()
     {
         Vector3 targetDir = player.transform.position - transform.position;
         targetDir.y = 0;
         transform.rotation = Quaternion.LookRotation(targetDir);
-        StartCoroutine(eAttack());                                      
+        StartCoroutine(EAttack());                                      
     }
-    IEnumerator eAttack()
+    IEnumerator EAttack()
     {
         if (canAttack)//공격 가능한 경우
         {
@@ -191,7 +191,7 @@ public class Enemy1FSM : MonoBehaviour
             }
         }
     }
-    void state_Return()
+    void State_Return()
     {
         legoAni.SetTrigger("Lego_Walking");
         print("Return");
@@ -209,11 +209,11 @@ public class Enemy1FSM : MonoBehaviour
         }
     }
 
-    public void state_Hit()
+    public void State_Hit()
     {
         if(enemyHp > 0)
         {
-            StartCoroutine(hitState());
+            StartCoroutine(HitState());
             e_state = EnemyState.Move;
         }
         else
@@ -221,16 +221,16 @@ public class Enemy1FSM : MonoBehaviour
             e_state = EnemyState.Die;
         }
     }
-    IEnumerator hitState()
+    IEnumerator HitState()
     {
         legoAni.SetTrigger("Lego_Hit");
         yield return new WaitForSeconds(enemyHittime);
     }
-    private void state_Die()
+    private void State_Die()
     {
-        StartCoroutine(dieState());
+        StartCoroutine(DieState());
     }
-    IEnumerator dieState()
+    IEnumerator DieState()
     {
         legoAni.SetTrigger("Lego_Die");
         yield return new WaitForSeconds(enemyDietime);
