@@ -11,8 +11,10 @@ public class Enemy2FSM : MonoBehaviour
     NavMeshAgent nMa;
     public GameObject bulletObj;
     public Transform shotPos;
-    Animator legoAni;
+    Animator BossAni;
+    Animator BossGunAni;
     public Slider enemyHpSlider;
+    public GameObject bossModel;
 
     public bool isHit = false;
 
@@ -55,10 +57,11 @@ public class Enemy2FSM : MonoBehaviour
     {
         nMa = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
-        originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
+        originalPos = bossModel.transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;                         //몹 이동속도
         e_state = EnemyState.Idle;
-        legoAni = GetComponent<Animator>();
+        BossAni = GetComponent<Animator>();
+        BossGunAni = GameObject.Find("Dummy001").GetComponent<Animator>();
     }
 
     private void OnDrawGizmos()
@@ -106,7 +109,7 @@ public class Enemy2FSM : MonoBehaviour
 
     void State_Idle()
     {
-        legoAni.SetTrigger("Boss_Idle");
+        BossAni.SetTrigger("Boss_Idle");
         print("Idle");
         if (targetTrackingdistance < enemyFindDistance)
         //플레이어가 인식거리에 들어온 경우
@@ -133,7 +136,7 @@ public class Enemy2FSM : MonoBehaviour
     }
     void State_Move()
     {
-        legoAni.SetTrigger("Boss_Walking");
+        BossAni.SetTrigger("Boss_Walking");
         nMa.SetDestination(player.transform.position);
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
@@ -169,7 +172,9 @@ public class Enemy2FSM : MonoBehaviour
     {
         if (canAttack)//공격 가능한 경우
         {
-            legoAni.SetTrigger("Boss_Attack");
+            BossAni.SetTrigger("Boss_Attack");
+            BossGunAni.SetTrigger("Weapon_Spin");
+            BossAni.SetBool("Boss_Finded",true);
             canAttack = false;
             yield return new WaitForSeconds(enemyAttackspeed);
             //공격 범위에 들어온 경우
@@ -180,6 +185,7 @@ public class Enemy2FSM : MonoBehaviour
             //공격 범위에서 벗어난 경우
             else if (targetTrackingdistance > enemyAttackDistance)
             {
+                BossGunAni.SetTrigger("Weapon_Rspin");
                 print("Attack > Move");
                 canAttack = false;
                 e_state = EnemyState.Move;
@@ -188,7 +194,8 @@ public class Enemy2FSM : MonoBehaviour
     }
     void State_Return()
     {
-        legoAni.SetTrigger("Boss_Walking");
+        BossAni.SetTrigger("Boss_Walking");
+        BossGunAni.SetTrigger("Weapon_RSpin");
         print("Return");
         nMa.isStopped = true;
         nMa.ResetPath();
@@ -218,7 +225,7 @@ public class Enemy2FSM : MonoBehaviour
     }
     IEnumerator HitState()
     {
-        legoAni.SetTrigger("Boss_Hit");
+        BossAni.SetTrigger("Boss_Hit");
         yield return new WaitForSeconds(enemyHittime);
     }
     private void State_Die()
@@ -227,7 +234,7 @@ public class Enemy2FSM : MonoBehaviour
     }
     IEnumerator DieState()
     {
-        legoAni.SetTrigger("Boss_Die");
+        BossAni.SetTrigger("Boss_Die");
         yield return new WaitForSeconds(enemyDietime);
         Destroy(gameObject);
     }
