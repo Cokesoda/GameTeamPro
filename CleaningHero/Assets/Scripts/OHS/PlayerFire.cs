@@ -42,7 +42,7 @@ public class PlayerFire : MonoBehaviour
                 {
                     isHit = true;
                     Enemy1FSM e1FSM = hitInfo.transform.GetComponent<Enemy1FSM>();
-                    e1FSM.state_Hit();
+                    e1FSM.State_Hit();
                     //EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
                     //eFSM.HitEnemy(weaponPower);
                 }

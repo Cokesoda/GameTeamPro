@@ -95,8 +95,8 @@ MonoBehaviour:
   enemyHpSlider: {fileID: 0}
   isHit: 0
   enemyFindDistance: 2
-  enemyAttackDistance: 1.5
-  enemyReturnDistance: 1.5
+  enemyAttackDistance: 2
+  enemyReturnDistance: 0.5
   enemyAttackDamage: 1
   enemyHp: 100
   enemyMaxHp: 101
