@@ -31,6 +31,8 @@ public class Enemy2FSM : MonoBehaviour
     public float enemyMovespeed = 5;         //적 이동 속도
     public float enemyHittime = 2f;          //적 피격 시간(초)
     public float enemyDietime = 2f;          //적 죽는 시간(초)
+    public float enemyHealtime = 1.1f;       //적 복귀 후 회복시간 +0.1 (초)
+    public float enemyHealing = 10;          //적 복귀 후 초당 회복량
 
     float targetTrackingdistance;
     Vector3 originalPos;                     //기존 생성위치 포지션 값
@@ -48,7 +50,6 @@ public class Enemy2FSM : MonoBehaviour
         Hit,
         Die
     }
-
 
     void Start()
     {
@@ -123,7 +124,7 @@ public class Enemy2FSM : MonoBehaviour
         }
         else
         {
-            if (HPcurrentTime >= 1 && enemyHp < enemyMaxHp)
+            if (HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
             {
                 enemyHp += 10;
                 HPcurrentTime = 0;
