@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 1/80f;
+    public float moveSpeed = 1f;
     public float jumpPower = 4f;
     public bool isJumping = false;
     
@@ -75,7 +75,7 @@ public class PlayerMove : MonoBehaviour
         }
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
-        cc.Move(dir * moveSpeed * Time.deltaTime);
+        cc.Move(dir * moveSpeed * (Time.deltaTime/2));
     }
 
     private void InteractionCtrl()
