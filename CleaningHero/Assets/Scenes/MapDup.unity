@@ -3522,6 +3522,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 31790646639761030, guid: b3833bab3eb0cc74693992f003a26d5a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 31790646639761030, guid: b3833bab3eb0cc74693992f003a26d5a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 31790646639761030, guid: b3833bab3eb0cc74693992f003a26d5a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 456505751986532785, guid: b3833bab3eb0cc74693992f003a26d5a, type: 3}
       propertyPath: m_Name
       value: Eff_Water_Fix
@@ -3536,7 +3548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4152384622183893683, guid: b3833bab3eb0cc74693992f003a26d5a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4152384622183893683, guid: b3833bab3eb0cc74693992f003a26d5a, type: 3}
       propertyPath: m_LocalRotation.w
