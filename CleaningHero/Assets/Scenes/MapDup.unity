@@ -3086,7 +3086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7334143707129544042, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: OCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 8129122912302721328, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
       propertyPath: m_Pivot.x
