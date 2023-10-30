@@ -11,6 +11,7 @@ TagManager:
   - ToyBox
   - Pillow
   - Weapon
+  - Book
   layers:
   - Default
   - TransparentFX
