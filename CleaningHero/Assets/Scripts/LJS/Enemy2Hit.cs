@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Enemy2Hit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Transform shotPos;
+    public GameObject enemy2Bullet;
 
-    // Update is called once per frame
-    void Update()
+    public void enemy2CreateBullet()
     {
-        
+        Instantiate(enemy2Bullet, shotPos.position, shotPos.rotation);
     }
 }

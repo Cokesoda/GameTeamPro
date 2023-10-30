@@ -125,13 +125,10 @@ public class Enemy2FSM : MonoBehaviour
             print("Hit!");
             e_state = EnemyState.Hit;
         }
-        else
+        if(HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
         {
-            if (HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
-            {
-                enemyHp += 10;
-                HPcurrentTime = 0;
-            }
+            enemyHp += 10;
+            HPcurrentTime = 0;
         }
     }
     void State_Move()
@@ -175,20 +172,18 @@ public class Enemy2FSM : MonoBehaviour
             BossAni.SetTrigger("Boss_Attack");
             BossGunAni.SetTrigger("Weapon_Spin");
             BossAni.SetBool("Boss_Finded",true);
-            canAttack = false;
             yield return new WaitForSeconds(enemyAttackspeed);
-            //공격 범위에 들어온 경우
-            if (targetTrackingdistance < enemyAttackDistance)
-            {
-                canAttack = true;
-            }
             //공격 범위에서 벗어난 경우
-            else if (targetTrackingdistance > enemyAttackDistance)
+            if (targetTrackingdistance > enemyAttackDistance)
             {
                 BossGunAni.SetTrigger("Weapon_Rspin");
                 print("Attack > Move");
                 canAttack = false;
                 e_state = EnemyState.Move;
+            }
+            else
+            {
+                canAttack = true;
             }
         }
     }
@@ -216,7 +211,18 @@ public class Enemy2FSM : MonoBehaviour
         if (enemyHp > 0)
         {
             StartCoroutine(HitState());
-            e_state = EnemyState.Move;
+            if(targetTrackingdistance > enemyFindDistance)
+            {
+                e_state = EnemyState.Idle;
+            }
+            else if(targetTrackingdistance < enemyFindDistance && targetTrackingdistance > enemyAttackDistance)
+            {
+                e_state = EnemyState.Move;
+            }
+            else if(targetTrackingdistance < enemyAttackDistance)
+            {
+                e_state = EnemyState.Attack;
+            }
         }
         else
         {
