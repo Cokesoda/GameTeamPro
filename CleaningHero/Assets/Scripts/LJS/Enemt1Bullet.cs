@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Enemy1Bullet : MonoBehaviour
 {
     public GameObject player;
     public GameObject enemy;
-    Enemy2FSM enemyStatus;
+    Enemy1FSM enemyStatus;
     GameObject playerStatus;
     LMstatus xLMstatus;
     string colliderName;
-    
+
     Rigidbody Lrb;
 
     void Start()
     {
         playerStatus = GameObject.Find("GameManager");
         xLMstatus = playerStatus.GetComponent<LMstatus>();
-        enemyStatus = enemy.GetComponent<Enemy2FSM>();
+        enemyStatus = enemy.GetComponent<Enemy1FSM>();
         Lrb = GetComponent<Rigidbody>();
-        Lrb.AddRelativeForce(0, 100, 0);
+        Lrb.AddRelativeForce(0,-1,20);
     }
     void OnCollisionEnter(Collision collision) //다른 오브젝트와 충돌했을 경우
     {
@@ -28,6 +28,6 @@ public class Bullet : MonoBehaviour
         {
             xLMstatus.playerHp -= enemyStatus.enemyAttackDamage;
         }
-        Destroy(gameObject,0.5f);
+        Destroy(gameObject, 0.5f);
     }
 }
