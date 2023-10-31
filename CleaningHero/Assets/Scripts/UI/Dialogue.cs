@@ -23,6 +23,10 @@ public class Dialogue : MonoBehaviour
 
     public sysnobsys[] dialogue;
 
+    public GameObject bg1;
+    public GameObject bg2;
+    public GameObject bg3;
+
     public GameObject DB_S;
     public GameObject DB_T;
     public GameObject DB_E;
@@ -41,6 +45,9 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
+        bg2.SetActive(false);
+        bg3.SetActive(false);
+
         DB_S.SetActive(false);
         DB_T.SetActive(false);
         DB_E.SetActive(false);
@@ -80,6 +87,17 @@ public class Dialogue : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
+                if (count == 28)
+                {
+                    bg1.SetActive(false);
+                    bg2.SetActive(true);
+                }
+                if (count > 28)
+                {
+                    bg2.SetActive(false);
+                    bg3.SetActive(true);
+                }
+                            
                 //대화의 끝을 알아야함.
                 if (count < dialogue.Length)
                 {
