@@ -5,7 +5,6 @@ using UnityEngine;
 public class StartTuto : MonoBehaviour
 {
     public GameObject HP;
-    public GameObject Weapon;
     public GameObject Item;
     public GameObject bullet;
     public GameObject Time;
@@ -15,7 +14,6 @@ public class StartTuto : MonoBehaviour
     void Start()
     {
         HP.SetActive(true);
-        Weapon.SetActive(false);
         Item.SetActive(false);
         bullet.SetActive(false);
         Time.SetActive(false);
@@ -32,14 +30,6 @@ public class StartTuto : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 HP.SetActive(false);
-                Weapon.SetActive(true);
-            }
-        }
-        else if (Weapon.activeSelf == true)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-                Weapon.SetActive(false);
                 Item.SetActive(true);
             }
         }

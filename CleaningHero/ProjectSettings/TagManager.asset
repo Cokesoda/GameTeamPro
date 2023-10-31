@@ -10,6 +10,8 @@ TagManager:
   - Bullet
   - ToyBox
   - Pillow
+  - Weapon
+  - Book
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - UI
   - Bullet
   - Enemy
-  - 
+  - Player
   - 
   - 
   - 

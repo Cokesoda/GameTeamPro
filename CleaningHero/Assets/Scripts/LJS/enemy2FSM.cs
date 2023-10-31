@@ -3,18 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
-public class enemy2FSM : MonoBehaviour
+public class Enemy2FSM : MonoBehaviour
 {
     GameObject player;
     NavMeshAgent nMa;
     public GameObject bulletObj;
-    GameObject shotPos;
-    GameObject playerStatus;
-    LMstatus xLMstatus;
-    Animator bossAni;
+    public Transform shotPos;
+    Animator BossAni;
+    Animator BossGunAni;
+    public Slider enemyHpSlider;
+    public GameObject bossModel;
 
-    //LMstatus statusScript;
+    public bool isHit = false;
+
     [Range(5, 0.1f)]
     public float enemyFindDistance = 0.5f;   //적 인식 거리
     [Range(5, 0.1f)]
@@ -24,17 +27,19 @@ public class enemy2FSM : MonoBehaviour
 
     public float enemyAttackDamage = 1;      //적 공격력
     public float enemyHp = 100;              //적 체력
+    public float enemyMaxHp = 101;           //적 최대 체력 + 1
     public float enemyAttackspeed = 0.01f;   //적 공격 속도(초)
-    [Range(1,0.1f)]
+    [Range(1, 0.1f)]
     public float enemyMovespeed = 5;         //적 이동 속도
-    public float enemySpinspeed = 90;        //적 회전 속도
     public float enemyHittime = 2f;          //적 피격 시간(초)
     public float enemyDietime = 2f;          //적 죽는 시간(초)
+    public float enemyHealtime = 1.1f;       //적 복귀 후 회복시간 +0.1 (초)
+    public float enemyHealing = 10;          //적 복귀 후 초당 회복량
 
     float targetTrackingdistance;
     Vector3 originalPos;                     //기존 생성위치 포지션 값
 
-    public float currentTime = 0;
+    public float HPcurrentTime = 0;
     bool canAttack = false;
 
     EnemyState e_state;
@@ -45,23 +50,18 @@ public class enemy2FSM : MonoBehaviour
         Attack,
         Return,
         Hit,
-        Die,
-        Finded
+        Die
     }
 
-    
     void Start()
     {
-        //statusScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LMstatus>();
         nMa = GetComponent<NavMeshAgent>();
-        playerStatus = GameObject.Find("GameManager");
-        xLMstatus = playerStatus.GetComponent<LMstatus>();
-        player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 오브젝트 이름 변경 *중요
-        originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
+        player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
+        originalPos = bossModel.transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;                         //몹 이동속도
         e_state = EnemyState.Idle;
-        bossAni = GetComponent<Animator>();
-        shotPos = GameObject.Find("bossShotpos");
+        BossAni = GetComponent<Animator>();
+        BossGunAni = GetComponentInChildren<Animator>();
     }
 
     private void OnDrawGizmos()
@@ -74,63 +74,82 @@ public class enemy2FSM : MonoBehaviour
 
     void Update()
     {
-        print(xLMstatus.playerHp);
-        targetTrackingdistance = Vector3.Distance(player.transform.position,transform.position);
-        currentTime += Time.deltaTime;
+        targetTrackingdistance = Vector3.Distance(player.transform.position, transform.position);
+        HPcurrentTime += Time.deltaTime;
+        if (HPcurrentTime >= 1.1)
+        {
+            HPcurrentTime = 0;
+        }
+
+        enemyHpSlider.value = enemyHp / enemyMaxHp;
 
         switch (e_state)
         {
             case EnemyState.Idle:
-                state_Idle();
+                State_Idle();
                 break;
             case EnemyState.Move:
-                state_Move();
+                State_Move();
                 break;
             case EnemyState.Attack:
-                state_Attack();
+                State_Attack();
                 break;
             case EnemyState.Return:
-                state_Return();
+                State_Return();
                 break;
             case EnemyState.Hit:
-                state_Hit();
+                State_Hit();
                 break;
             case EnemyState.Die:
-                state_Die();
+                State_Die();
                 break;
         }
-        
     }
 
 
-    void state_Idle()
+    void State_Idle()
     {
+        BossAni.SetTrigger("Boss_Idle");
         print("Idle");
-        if(targetTrackingdistance < enemyFindDistance)
-            //플레이어가 인식거리에 들어온 경우
+        if (targetTrackingdistance < enemyFindDistance)
+        //플레이어가 인식거리에 들어온 경우
         {
-            transform.LookAt(player.transform);
+            Vector3 targetDir = player.transform.position - transform.position;
+            targetDir.y = 0;
+            transform.rotation = Quaternion.LookRotation(targetDir);
             e_state = EnemyState.Move;
             print("Idle > Move");
         }
+        else if (isHit)
+        {
+            print("Hit!");
+            e_state = EnemyState.Hit;
+        }
+        if(HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
+        {
+            enemyHp += 10;
+            HPcurrentTime = 0;
+        }
     }
-    void state_Move()
+    void State_Move()
     {
+        BossAni.SetTrigger("Boss_Walking");
         nMa.SetDestination(player.transform.position);
-        bossAni.SetTrigger("Boss_Walking");
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
         //공격거리의 -0.09까지 가서 멈춤
-        transform.LookAt(player.transform);
+        Vector3 targetDir = player.transform.position - transform.position;
+        targetDir.y = 0;
+        transform.rotation = Quaternion.LookRotation(targetDir);
         if (targetTrackingdistance < enemyAttackDistance)
-            //플레이어가 공격거리내에 들어온 경우
+        //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
             canAttack = true;
             e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
-        if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
-            //이동중 복귀거리 이상 이동한 경우
+        else if (Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
+        //이동중 복귀거리 이상 이동한 경우
         {
             canAttack = false;
             nMa.stoppingDistance = 0.001f;
@@ -138,43 +157,47 @@ public class enemy2FSM : MonoBehaviour
             e_state = EnemyState.Return;
         }
     }
-    void state_Attack()
+
+    void State_Attack()
     {
-        transform.LookAt(player.transform);
-        StartCoroutine(eAttack());
-        //AnimationPlay(Attack);
+        Vector3 targetDir = player.transform.position - transform.position;
+        targetDir.y = 0;
+        transform.rotation = Quaternion.LookRotation(targetDir);
+        StartCoroutine(EAttack());
     }
-    IEnumerator eAttack()
+    IEnumerator EAttack()
     {
         if (canAttack)//공격 가능한 경우
         {
-            canAttack = false;
-
-            Instantiate(bulletObj,shotPos.transform.position,shotPos.transform.rotation);
-            
+            BossAni.SetTrigger("Boss_Attack");
+            BossGunAni.SetTrigger("Weapon_Spin");
+            BossAni.SetBool("Boss_Finded",true);
             yield return new WaitForSeconds(enemyAttackspeed);
-            if (targetTrackingdistance < enemyAttackDistance)
+            //공격 범위에서 벗어난 경우
+            if (targetTrackingdistance > enemyAttackDistance)
             {
-                //공격()
-                canAttack = true;
-            }
-            else if(targetTrackingdistance > enemyAttackDistance)
-            {
+                BossGunAni.SetTrigger("Weapon_Rspin");
                 print("Attack > Move");
+                canAttack = false;
                 e_state = EnemyState.Move;
+            }
+            else
+            {
+                canAttack = true;
             }
         }
     }
-    void state_Return()
+    void State_Return()
     {
-        print(originalPos);
+        BossAni.SetTrigger("Boss_Walking");
+        BossGunAni.SetTrigger("Weapon_RSpin");
         print("Return");
         nMa.isStopped = true;
         nMa.ResetPath();
         nMa.SetDestination(originalPos);
 
         //복귀후 idle상태로 변경조건                                                    
-        if(Vector3.Distance(transform.position,originalPos)<0.2f)
+        if (Vector3.Distance(transform.position, originalPos) < 0.2f)
         {
             nMa.isStopped = true;
             nMa.ResetPath();
@@ -183,31 +206,41 @@ public class enemy2FSM : MonoBehaviour
         }
     }
 
-    private void state_Hit()
+    public void State_Hit()
     {
-        if(enemyHp > 0)
+        if (enemyHp > 0)
         {
-            StartCoroutine(hitstate());
-            e_state = EnemyState.Move;
+            StartCoroutine(HitState());
+            if(targetTrackingdistance > enemyFindDistance)
+            {
+                e_state = EnemyState.Idle;
+            }
+            else if(targetTrackingdistance < enemyFindDistance && targetTrackingdistance > enemyAttackDistance)
+            {
+                e_state = EnemyState.Move;
+            }
+            else if(targetTrackingdistance < enemyAttackDistance)
+            {
+                e_state = EnemyState.Attack;
+            }
         }
         else
         {
             e_state = EnemyState.Die;
         }
     }
-    IEnumerator hitstate()
+    IEnumerator HitState()
     {
-        //AnimationPlay(피격);
+        BossAni.SetTrigger("Boss_Hit");
         yield return new WaitForSeconds(enemyHittime);
-        e_state = EnemyState.Move;
     }
-    private void state_Die()
+    private void State_Die()
     {
-        //AnimationPlay(죽음);
-        StartCoroutine(EnemyDiestate());
+        StartCoroutine(DieState());
     }
-    IEnumerator EnemyDiestate()
+    IEnumerator DieState()
     {
+        BossAni.SetTrigger("Boss_Die");
         yield return new WaitForSeconds(enemyDietime);
         Destroy(gameObject);
     }

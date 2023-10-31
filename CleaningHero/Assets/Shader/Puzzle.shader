@@ -4,6 +4,7 @@ Shader "Custom/Puzzle"
     {
         _Color("Color", Color) = (0,0,0,1)
         _Intensity("Intensity", Range(0,10)) = 0
+        _Bright("Birght",Range(0,1)) = 1
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
     }
     SubShader
@@ -27,6 +28,7 @@ Shader "Custom/Puzzle"
 
         fixed4 _Color;
         float _Intensity;
+        float _Bright;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -39,7 +41,7 @@ Shader "Custom/Puzzle"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Emission = c.rgb + _Color * _Intensity;
+            o.Emission = (c.rgb * _Bright) + _Color * _Intensity;
             o.Alpha = c.a;
         }
         ENDCG

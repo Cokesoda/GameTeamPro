@@ -2,13 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 1/80f;
+    public float moveSpeed = 1f;
     public float jumpPower = 4f;
     public bool isJumping = false;
+    
     public int hp = 20;
+    int maxHp = 20;
+    public Slider hpSlider;
 
     CharacterController cc;
 
@@ -33,6 +37,8 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hpSlider.value = (float)hp / (float)maxHp;
+
         if (GameManager.gm.gState != GameManager.GameState.Run)
         {
             return;
@@ -69,7 +75,7 @@ public class PlayerMove : MonoBehaviour
         }
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
-        cc.Move(dir * moveSpeed * Time.deltaTime);
+        cc.Move(dir * moveSpeed * (Time.deltaTime/2));
     }
 
     private void InteractionCtrl()

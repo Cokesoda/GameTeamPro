@@ -9,7 +9,6 @@ public class PlayerFire : MonoBehaviour
     public bool isHit = false;
 
     ParticleSystem ps;
-
     Animator anim;
 
     // Start is called before the first frame update
@@ -32,6 +31,7 @@ public class PlayerFire : MonoBehaviour
             if (anim.GetFloat("MoveMotion") == 0)
             {
                 anim.SetTrigger("Attack");
+                anim.SetFloat("AttackSpeed", 2f);
             }
             //Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
@@ -41,7 +41,8 @@ public class PlayerFire : MonoBehaviour
                 if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
                     isHit = true;
-                    Debug.Log("======================== " + isHit);
+                    Enemy1FSM e1FSM = hitInfo.transform.GetComponent<Enemy1FSM>();
+                    e1FSM.State_Hit();
                     //EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
                     //eFSM.HitEnemy(weaponPower);
                 }
