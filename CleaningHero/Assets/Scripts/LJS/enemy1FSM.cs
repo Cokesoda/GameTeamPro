@@ -12,9 +12,9 @@ public class Enemy1FSM : MonoBehaviour
     public GameObject bulletObj;
     public Transform shotPos;
     public Transform shotPos2;
-    GameObject playerStatus;
     Animator legoAni;
     public Slider enemyHpSlider;
+    int ranattack;
 
     public bool isHit = false;
 
@@ -57,8 +57,7 @@ public class Enemy1FSM : MonoBehaviour
     void Start()
     {
         nMa = GetComponent<NavMeshAgent>();
-        playerStatus = GameObject.Find("GameManager");
-        player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
+        //player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
         nMa.speed = enemyMovespeed;                         //몹 이동속도
         e_state = EnemyState.Idle;
@@ -110,14 +109,14 @@ public class Enemy1FSM : MonoBehaviour
 
     void State_Idle()
     {
-        legoAni.SetTrigger("Lego_Idle");
         print("Idle");
         //플레이어가 공격거리에 들어온 경우
         if(targetTrackingdistance < enemyAttackDistance)
         {
             e_state = EnemyState.Attack;
         }
-        else if(targetTrackingdistance < enemyFindDistance)
+        else if(targetTrackingdistance < enemyFindDistance &&
+            targetTrackingdistance > enemyAttackDistance)
         //플레이어가 인식거리에 들어온 경우
         {
             Vector3 targetDir = player.transform.position - transform.position;
@@ -172,21 +171,30 @@ public class Enemy1FSM : MonoBehaviour
     }
     IEnumerator EAttack()
     {
-        int ranattack = UnityEngine.Random.Range(1, 3);
-        legoAni.SetTrigger("Lego_Attack");
-        legoAni.SetInteger("ranAttack", ranattack);
-        yield return new WaitForSeconds(enemyAttackspeed);
-        //공격거리 > 현재거리 > 인식거리
-        if (targetTrackingdistance > enemyAttackDistance &&
-            targetTrackingdistance < enemyFindDistance)
+        //현재거리 / 공격거리 / 인식거리
+        if(targetTrackingdistance < enemyAttackDistance)
         {
+            legoAni.SetTrigger("Lego_Attack");
+            legoAni.SetBool("Lego_canAttack", true);
+
+            ranattack = UnityEngine.Random.Range(1, 3);
+            legoAni.SetInteger("ranAttack",ranattack);
+            print("공격");
+            yield return new WaitForSeconds(enemyAttackspeed);
+        }
+        //공격거리 / 현재거리 / 인식거리
+        if (targetTrackingdistance > enemyAttackDistance && targetTrackingdistance < enemyFindDistance)
+        {
+            legoAni.SetBool("Lego_canAttack", false);
             e_state = EnemyState.Move;
         }
-        //인식거리 > 현재거리
-        else if(targetTrackingdistance > enemyFindDistance)
+        //공격거리 / 인식거리 / 현재거리
+        if(targetTrackingdistance > enemyFindDistance)
         {
+            legoAni.SetBool("Lego_canAttack", false);
             e_state = EnemyState.Idle;
         }
+        yield break;
     }
     void State_Return()
     {
