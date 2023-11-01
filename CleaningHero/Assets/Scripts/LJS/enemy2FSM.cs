@@ -61,7 +61,7 @@ public class Enemy2FSM : MonoBehaviour
         nMa.speed = enemyMovespeed;                         //몹 이동속도
         e_state = EnemyState.Idle;
         BossAni = GetComponent<Animator>();
-        BossGunAni = GetComponentInChildren<Animator>();
+        BossGunAni = GameObject.Find("Dummy001").GetComponentInChildren<Animator>();
     }
 
     private void OnDrawGizmos()
@@ -110,7 +110,7 @@ public class Enemy2FSM : MonoBehaviour
     void State_Idle()
     {
         BossAni.SetTrigger("Boss_Idle");
-        print("Idle");
+        //print("Idle");
         if (targetTrackingdistance < enemyFindDistance)
         //플레이어가 인식거리에 들어온 경우
         {
@@ -167,24 +167,21 @@ public class Enemy2FSM : MonoBehaviour
     }
     IEnumerator EAttack()
     {
-        if (canAttack)//공격 가능한 경우
+        BossAni.SetTrigger("Boss_Attack");
+        BossGunAni.SetTrigger("Weapon_Spin");
+        BossAni.SetBool("Boss_Finded", true);
+        yield return new WaitForSeconds(enemyAttackspeed);
+        //공격 범위에서 벗어난 경우
+        if (targetTrackingdistance > enemyAttackDistance)
         {
-            BossAni.SetTrigger("Boss_Attack");
-            BossGunAni.SetTrigger("Weapon_Spin");
-            BossAni.SetBool("Boss_Finded",true);
-            yield return new WaitForSeconds(enemyAttackspeed);
-            //공격 범위에서 벗어난 경우
-            if (targetTrackingdistance > enemyAttackDistance)
-            {
-                BossGunAni.SetTrigger("Weapon_Rspin");
-                print("Attack > Move");
-                canAttack = false;
-                e_state = EnemyState.Move;
-            }
-            else
-            {
-                canAttack = true;
-            }
+            print("Attack > Move");
+            canAttack = false;
+            BossGunAni.SetTrigger("Weapon_RSpin");
+            e_state = EnemyState.Move;
+        }
+        else
+        {
+            canAttack = true;
         }
     }
     void State_Return()
