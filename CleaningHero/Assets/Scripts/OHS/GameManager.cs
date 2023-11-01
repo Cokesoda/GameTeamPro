@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         gState = GameState.Ready;
         StartCoroutine(ReadyToStart());
-        player = GameObject.Find("Player_Dummy").GetComponent<PlayerMove>();
+        player = GameObject.Find("Player(Dummy)").GetComponent<PlayerMove>();
     }
 
     IEnumerator ReadyToStart()

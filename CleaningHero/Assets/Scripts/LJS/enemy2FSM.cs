@@ -61,7 +61,7 @@ public class Enemy2FSM : MonoBehaviour
         nMa.speed = enemyMovespeed;                         //¸÷ ÀÌµ¿¼Óµµ
         e_state = EnemyState.Idle;
         BossAni = GetComponent<Animator>();
-        BossGunAni = GameObject.Find("Dummy001").GetComponent<Animator>();
+        BossGunAni = GetComponentInChildren<Animator>();
     }
 
     private void OnDrawGizmos()

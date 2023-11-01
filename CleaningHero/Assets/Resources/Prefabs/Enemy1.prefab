@@ -465,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f75d193338c8c4aa90a1e7ae3adfdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   bulletObj: {fileID: 3356717609026953662, guid: 397a4a75bbd65ea4f954971f39e99d2c, type: 3}
   shotPos: {fileID: 6784668343904004624}
   shotPos2: {fileID: 3860293758125129426}
@@ -474,12 +475,14 @@ MonoBehaviour:
   enemyAttackDistance: 1
   enemyReturnDistance: 1.5
   enemyAttackDamage: 1
-  enemyHp: 100
-  enemyMaxHp: 100
+  enemyHp: 8
+  enemyMaxHp: 8
   enemyAttackspeed: 1
   enemyMovespeed: 0.652
   enemyHittime: 0.14
   enemyDietime: 0.23
+  enemyHealtime: 1.1
+  enemyHealing: 1
   HPcurrentTime: 0
 --- !u!95 &3628072361505899552
 Animator:
@@ -600,7 +603,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -710910164944623929, guid: aa6993ff0ace6e2419c61572b900cd36, type: 3}
+  - {fileID: 2100000, guid: d103a677086e62a498f03130c9b721eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

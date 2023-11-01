@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Enemy1FSM : MonoBehaviour
 {
-    GameObject player;
+    public GameObject player;
     NavMeshAgent nMa;
     public GameObject bulletObj;
     public Transform shotPos;
@@ -41,7 +41,6 @@ public class Enemy1FSM : MonoBehaviour
     Vector3 originalPos;                     //기존 생성위치 포지션 값
 
     public float HPcurrentTime = 0;
-    bool canAttack = false;
 
     EnemyState e_state;
     enum EnemyState
@@ -113,8 +112,13 @@ public class Enemy1FSM : MonoBehaviour
     {
         legoAni.SetTrigger("Lego_Idle");
         print("Idle");
-        if(targetTrackingdistance < enemyFindDistance)
-            //플레이어가 인식거리에 들어온 경우
+        //플레이어가 공격거리에 들어온 경우
+        if(targetTrackingdistance < enemyAttackDistance)
+        {
+            e_state = EnemyState.Attack;
+        }
+        else if(targetTrackingdistance < enemyFindDistance)
+        //플레이어가 인식거리에 들어온 경우
         {
             Vector3 targetDir = player.transform.position - transform.position;
             targetDir.y = 0;
@@ -122,22 +126,20 @@ public class Enemy1FSM : MonoBehaviour
             e_state = EnemyState.Move;
             print("Idle > Move");
         }
-        else if (isHit)
+        else if (isHit == true)
         {
             print("Hit!");
             e_state = EnemyState.Hit;
         }
-        else
+        else if(HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
         {
-            if(HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
-            {
-                enemyHp += 10;
-                HPcurrentTime = 0;
-            }
+            enemyHp += 10;
+            HPcurrentTime = 0;
         }
     }
     void State_Move()
     {
+        print("Move");
         legoAni.SetTrigger("Lego_Walking");
         nMa.SetDestination(player.transform.position);
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
@@ -149,14 +151,12 @@ public class Enemy1FSM : MonoBehaviour
             //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
-            canAttack = true;
             e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
         else if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
             //이동중 복귀거리 이상 이동한 경우
         {
-            canAttack = false;
             nMa.stoppingDistance = 0.001f;
             print("Move > Return");
             e_state = EnemyState.Return;
@@ -168,29 +168,24 @@ public class Enemy1FSM : MonoBehaviour
         Vector3 targetDir = player.transform.position - transform.position;
         targetDir.y = 0;
         transform.rotation = Quaternion.LookRotation(targetDir);
-        StartCoroutine(EAttack());                                      
+        StartCoroutine(EAttack());
     }
     IEnumerator EAttack()
     {
-        if (canAttack)//공격 가능한 경우
+        int ranattack = UnityEngine.Random.Range(1, 3);
+        legoAni.SetTrigger("Lego_Attack");
+        legoAni.SetInteger("ranAttack", ranattack);
+        yield return new WaitForSeconds(enemyAttackspeed);
+        //공격거리 > 현재거리 > 인식거리
+        if (targetTrackingdistance > enemyAttackDistance &&
+            targetTrackingdistance < enemyFindDistance)
         {
-            int ranattack = UnityEngine.Random.Range(1, 3);
-            legoAni.SetTrigger("Lego_Attack");
-            legoAni.SetInteger("ranAttack", ranattack);
-            canAttack = false;
-            yield return new WaitForSeconds(enemyAttackspeed);
-            //공격 범위에 들어온 경우
-            if (targetTrackingdistance < enemyAttackDistance)
-            {
-                canAttack = true;
-            }
-            //공격 범위에서 벗어난 경우
-            else if(targetTrackingdistance > enemyAttackDistance)
-            {
-                print("Attack > Move");
-                canAttack = false;
-                e_state = EnemyState.Move;
-            }
+            e_state = EnemyState.Move;
+        }
+        //인식거리 > 현재거리
+        else if(targetTrackingdistance > enemyFindDistance)
+        {
+            e_state = EnemyState.Idle;
         }
     }
     void State_Return()

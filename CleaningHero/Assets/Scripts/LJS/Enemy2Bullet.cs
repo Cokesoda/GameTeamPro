@@ -18,7 +18,7 @@ public class Enemy2Bullet : MonoBehaviour
         xLMstatus = playerStatus.GetComponent<LMstatus>();
         enemyStatus = enemy.GetComponent<Enemy2FSM>();
         Lrb = GetComponent<Rigidbody>();
-        Lrb.AddRelativeForce(0, 100, 0);
+        Lrb.AddRelativeForce(0, 0, 100);
     }
     void OnCollisionEnter(Collision collision) //다른 오브젝트와 충돌했을 경우
     {

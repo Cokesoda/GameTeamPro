@@ -72,15 +72,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.8
+      value: 0.68093
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2
+      value: -0.8963872
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -124,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7fd5f54cb8941ec40a5091853ac0e813, type: 2}
     - target: {fileID: 919132149155446097, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_Name
-      value: Player_Dummy Variant
+      value: Player_Dummy
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_Layer
@@ -132,7 +132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e1a586258f0428f44a542214cc7eda12, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cebefe932d0ef84c9bda8418338332b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 3
   jumpPower: 10
   isJumping: 0
   hp: 20
