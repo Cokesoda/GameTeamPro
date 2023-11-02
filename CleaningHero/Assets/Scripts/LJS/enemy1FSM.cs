@@ -203,9 +203,9 @@ public class Enemy1FSM : MonoBehaviour
         nMa.isStopped = true;
         nMa.ResetPath();
         nMa.SetDestination(originalPos);
-
+        nMa.stoppingDistance = 0.1f;
         //복귀후 idle상태로 변경조건                                                    
-        if(Vector3.Distance(transform.position,originalPos)<0.2f)
+        if (Vector3.Distance(transform.position,originalPos)<0.3f)
         {
             nMa.isStopped = true;
             nMa.ResetPath();
