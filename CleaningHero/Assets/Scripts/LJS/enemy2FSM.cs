@@ -40,7 +40,7 @@ public class Enemy2FSM : MonoBehaviour
     Vector3 originalPos;                     //기존 생성위치 포지션 값
 
     public float HPcurrentTime = 0;
-    bool canAttack = false;
+    //bool canAttack = false;
 
     EnemyState e_state;
     enum EnemyState
@@ -82,7 +82,10 @@ public class Enemy2FSM : MonoBehaviour
         }
 
         enemyHpSlider.value = enemyHp / enemyMaxHp;
-
+        if (isHit)
+        {
+            e_state = EnemyState.Hit;
+        }
         switch (e_state)
         {
             case EnemyState.Idle:
@@ -144,14 +147,14 @@ public class Enemy2FSM : MonoBehaviour
         //플레이어가 공격거리내에 들어온 경우
         {
             print("Move > Attack");
-            canAttack = true;
+            //canAttack = true;
             e_state = EnemyState.Attack;
         }
         //초기 위치에서 벗어난 경우
         else if (Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
         //이동중 복귀거리 이상 이동한 경우
         {
-            canAttack = false;
+            //canAttack = false;
             nMa.stoppingDistance = 0.001f;
             print("Move > Return");
             e_state = EnemyState.Return;
@@ -175,13 +178,13 @@ public class Enemy2FSM : MonoBehaviour
         if (targetTrackingdistance > enemyAttackDistance)
         {
             print("Attack > Move");
-            canAttack = false;
+            //canAttack = false;
             BossGunAni.SetTrigger("Weapon_RSpin");
             e_state = EnemyState.Move;
         }
         else
         {
-            canAttack = true;
+            //canAttack = true;
         }
     }
     void State_Return()

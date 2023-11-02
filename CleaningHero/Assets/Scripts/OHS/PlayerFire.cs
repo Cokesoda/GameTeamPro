@@ -21,6 +21,7 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isHit = false;
         if (GameManager.gm.gState != GameManager.GameState.Run)
         {
             return;
@@ -40,16 +41,16 @@ public class PlayerFire : MonoBehaviour
             {
                 if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
-                    isHit = true;
-                    Enemy1FSM e1FSM = hitInfo.transform.GetComponent<Enemy1FSM>();
-                    e1FSM.State_Hit();
-                    //EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
-                    //eFSM.HitEnemy(weaponPower);
+                    
+                    //isHit = true;
+                    Debug.Log("==============");
+                    Enemy1FSM eFSM = hitInfo.collider.GetComponent<Enemy1FSM>();
+                    eFSM.enemyHp -= 10;
                 }
                 else
                 {
                     //transform.TransformDirection(Vector3.forward)
-                    //Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward * hitInfo.distance, Color.yellow);
+                    Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward * hitInfo.distance, Color.yellow);
                     wBulletEffect.transform.position = hitInfo.point;
                     wBulletEffect.transform.forward = hitInfo.normal;
                     ps.Play();
