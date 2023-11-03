@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
+    public GameObject gamemanager;
     public GameObject firePosition;
-    public GameObject wBulletEffect;
+    //public GameObject wBulletEffect;
     public bool isHit = false;
 
-    ParticleSystem ps;
+    public GameObject ShotEx;
+    public ParticleSystem HitEx;
+    public GameObject ExOriginalPos;
+    //ParticleSystem ps;
     Animator anim;
+    LMstatus playerstatus;
+    public GameObject enemyTag;
 
     // Start is called before the first frame update
     void Start()
     {
-        ps = wBulletEffect.GetComponent<ParticleSystem>();
+        //ps = wBulletEffect.GetComponent<ParticleSystem>();
         anim = GetComponentInChildren<Animator>();
+        playerstatus = gamemanager.GetComponent<LMstatus>();
     }
 
     // Update is called once per frame
@@ -35,27 +42,33 @@ public class PlayerFire : MonoBehaviour
                 anim.SetFloat("AttackSpeed", 2f);
             }
             //Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-
+            //ShotEx.transform.position = firePosition.transform.position;
+            //ShotEx.transform.rotation = firePosition.transform.rotation;
+            
             RaycastHit hitInfo = new RaycastHit();
-            if(Physics.Raycast(firePosition.transform.position, Camera.main.transform.forward, out hitInfo, 100))
+            if(Physics.Raycast(firePosition.transform.position, Camera.main.transform.forward, out hitInfo, playerstatus.playerAttackDistance))
             {
-                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward,Color.red);
+                if (hitInfo.collider.tag == enemyTag.tag)
                 {
-                    
                     //isHit = true;
                     Debug.Log("==============");
                     Enemy1FSM eFSM = hitInfo.collider.GetComponent<Enemy1FSM>();
-                    eFSM.enemyHp -= 10;
+                    eFSM.enemyHp -= playerstatus.playerAttackDamage;
+                    eFSM.isHit = true;
                 }
                 else
                 {
                     //transform.TransformDirection(Vector3.forward)
-                    Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward * hitInfo.distance, Color.yellow);
-                    wBulletEffect.transform.position = hitInfo.point;
-                    wBulletEffect.transform.forward = hitInfo.normal;
-                    ps.Play();
+                    Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward * playerstatus.playerAttackDistance, Color.red);
+                    //wBulletEffect.transform.position = hitInfo.point;
+                    //wBulletEffect.transform.forward = hitInfo.normal;
+                    //ps.Play();
                     //ps.Stop();
                     //Destroy(ps, 0.1f);
+                    HitEx.transform.position = hitInfo.point;
+                    HitEx.transform.forward = hitInfo.normal;
+                    HitEx.Play();
                 }
             }
         }

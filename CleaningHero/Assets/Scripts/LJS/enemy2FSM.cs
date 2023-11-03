@@ -112,7 +112,6 @@ public class Enemy2FSM : MonoBehaviour
 
     void State_Idle()
     {
-        BossAni.SetTrigger("Boss_Idle");
         //print("Idle");
         if (targetTrackingdistance < enemyFindDistance)
         //플레이어가 인식거리에 들어온 경우
@@ -128,10 +127,14 @@ public class Enemy2FSM : MonoBehaviour
             print("Hit!");
             e_state = EnemyState.Hit;
         }
-        if(HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
+        else if(HPcurrentTime >= enemyHealtime && enemyHp < enemyMaxHp)
         {
             enemyHp += 10;
             HPcurrentTime = 0;
+        }
+        else
+        {
+            BossAni.SetTrigger("Boss_Idle");
         }
     }
     void State_Move()
