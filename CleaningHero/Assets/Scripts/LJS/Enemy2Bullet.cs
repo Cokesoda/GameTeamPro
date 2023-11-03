@@ -23,7 +23,7 @@ public class Enemy2Bullet : MonoBehaviour
     void OnCollisionEnter(Collision collision) //다른 오브젝트와 충돌했을 경우
     {
         colliderName = collision.collider.name;
-        if (colliderName == "Player")
+        if (colliderName == "Player_Dummy")
         {
             xLMstatus.playerHp -= enemyStatus.enemyAttackDamage;
         }

@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     public float jumpPower = 4f;
     public bool isJumping = false;
     
-    public int hp = 20;
+    public float hp = 20;
     int maxHp = 20;
     public Slider hpSlider;
 
@@ -117,7 +117,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void DamageAction(int damage)
+    public void DamageAction(float damage)
     {
         hp -= damage;
 

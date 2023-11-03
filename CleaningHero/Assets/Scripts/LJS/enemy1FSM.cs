@@ -195,7 +195,7 @@ public class Enemy1FSM : MonoBehaviour
 
             ranattack = UnityEngine.Random.Range(1, 3);
             legoAni.SetInteger("ranAttack",ranattack);
-            print("공격");
+            //print("공격");
             yield return new WaitForSeconds(enemyAttackspeed);
         }
         //공격거리 / 현재거리 / 인식거리
