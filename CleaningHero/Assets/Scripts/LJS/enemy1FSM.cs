@@ -18,7 +18,11 @@ public class Enemy1FSM : MonoBehaviour
 
     public bool isHit = false;
 
+    [SerializeField]
+    private GameObject Yb_item_prefab; // 파괴시 생성할 아이템 프리팹
 
+    [SerializeField]
+    private int count;  // 파괴시 생성할 아이템 갯수
     [Range(5, 0.1f)]
     public float enemyFindDistance = 0.5f;   //적 인식 거리
     [Range(5, 0.1f)]
