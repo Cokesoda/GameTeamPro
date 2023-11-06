@@ -19,25 +19,25 @@ public class Enemy2FSM : MonoBehaviour
     public bool isHit = false;
 
     [Range(5, 0.1f)]
-    public float enemyFindDistance = 0.5f;   //Àû ÀÎ½Ä °Å¸®
+    public float enemyFindDistance = 0.5f;   //ì  ì¸ì‹ ê±°ë¦¬
     [Range(5, 0.1f)]
-    public float enemyAttackDistance = 1;    //Àû °ø°İ °Å¸®
+    public float enemyAttackDistance = 1;    //ì  ê³µê²© ê±°ë¦¬
     [Range(5, 0.1f)]
-    public float enemyReturnDistance = 1.5f; //Àû º¹±Í °Å¸®
+    public float enemyReturnDistance = 1.5f; //ì  ë³µê·€ ê±°ë¦¬
 
-    public float enemyAttackDamage = 1;      //Àû °ø°İ·Â
-    public float enemyHp = 100;              //Àû Ã¼·Â
-    public float enemyMaxHp = 101;           //Àû ÃÖ´ë Ã¼·Â + 1
-    public float enemyAttackspeed = 0.01f;   //Àû °ø°İ ¼Óµµ(ÃÊ)
+    public float enemyAttackDamage = 1;      //ì  ê³µê²©ë ¥
+    public float enemyHp = 100;              //ì  ì²´ë ¥
+    public float enemyMaxHp = 101;           //ì  ìµœëŒ€ ì²´ë ¥ + 1
+    public float enemyAttackspeed = 0.01f;   //ì  ê³µê²© ì†ë„(ì´ˆ)
     [Range(1, 0.1f)]
-    public float enemyMovespeed = 5;         //Àû ÀÌµ¿ ¼Óµµ
-    public float enemyHittime = 2f;          //Àû ÇÇ°İ ½Ã°£(ÃÊ)
-    public float enemyDietime = 2f;          //Àû Á×´Â ½Ã°£(ÃÊ)
-    public float enemyHealtime = 1.1f;       //Àû º¹±Í ÈÄ È¸º¹½Ã°£ +0.1 (ÃÊ)
-    public float enemyHealing = 10;          //Àû º¹±Í ÈÄ ÃÊ´ç È¸º¹·®
+    public float enemyMovespeed = 5;         //ì  ì´ë™ ì†ë„
+    public float enemyHittime = 2f;          //ì  í”¼ê²© ì‹œê°„(ì´ˆ)
+    public float enemyDietime = 2f;          //ì  ì£½ëŠ” ì‹œê°„(ì´ˆ)
+    public float enemyHealtime = 1.1f;       //ì  ë³µê·€ í›„ íšŒë³µì‹œê°„ +0.1 (ì´ˆ)
+    public float enemyHealing = 10;          //ì  ë³µê·€ í›„ ì´ˆë‹¹ íšŒë³µëŸ‰
 
     float targetTrackingdistance;
-    Vector3 originalPos;                     //±âÁ¸ »ı¼ºÀ§Ä¡ Æ÷Áö¼Ç °ª
+    Vector3 originalPos;                     //ê¸°ì¡´ ìƒì„±ìœ„ì¹˜ í¬ì§€ì…˜ ê°’
 
     public float HPcurrentTime = 0;
     //bool canAttack = false;
@@ -56,9 +56,9 @@ public class Enemy2FSM : MonoBehaviour
     void Start()
     {
         nMa = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");//¸ŞÀÎ Ä³¸¯ÅÍ Tag º¯°æ *Áß¿ä
-        originalPos = bossModel.transform.position;                   //»ı¼ºµÈ À§Ä¡¸¦ ÃÊ±âÀ§Ä¡·Î ÀúÀå
-        nMa.speed = enemyMovespeed;                         //¸÷ ÀÌµ¿¼Óµµ
+        player = GameObject.FindGameObjectWithTag("Player");//ë©”ì¸ ìºë¦­í„° Tag ë³€ê²½ *ì¤‘ìš”
+        originalPos = transform.position;                   //ìƒì„±ëœ ìœ„ì¹˜ë¥¼ ì´ˆê¸°ìœ„ì¹˜ë¡œ ì €ì¥
+        nMa.speed = enemyMovespeed;                         //ëª¹ ì´ë™ì†ë„
         e_state = EnemyState.Idle;
         BossAni = GetComponent<Animator>();
         BossGunAni = GameObject.Find("Dummy001").GetComponentInChildren<Animator>();
@@ -114,7 +114,7 @@ public class Enemy2FSM : MonoBehaviour
     {
         //print("Idle");
         if (targetTrackingdistance < enemyFindDistance)
-        //ÇÃ·¹ÀÌ¾î°¡ ÀÎ½Ä°Å¸®¿¡ µé¾î¿Â °æ¿ì
+        //í”Œë ˆì´ì–´ê°€ ì¸ì‹ê±°ë¦¬ì— ë“¤ì–´ì˜¨ ê²½ìš°
         {
             Vector3 targetDir = player.transform.position - transform.position;
             targetDir.y = 0;
@@ -142,20 +142,20 @@ public class Enemy2FSM : MonoBehaviour
         BossAni.SetTrigger("Boss_Walking");
         nMa.SetDestination(player.transform.position);
         nMa.stoppingDistance = enemyAttackDistance - 0.09f;
-        //°ø°İ°Å¸®ÀÇ -0.09±îÁö °¡¼­ ¸ØÃã
+        //ê³µê²©ê±°ë¦¬ì˜ -0.09ê¹Œì§€ ê°€ì„œ ë©ˆì¶¤
         Vector3 targetDir = player.transform.position - transform.position;
         targetDir.y = 0;
         transform.rotation = Quaternion.LookRotation(targetDir);
         if (targetTrackingdistance < enemyAttackDistance)
-        //ÇÃ·¹ÀÌ¾î°¡ °ø°İ°Å¸®³»¿¡ µé¾î¿Â °æ¿ì
+        //í”Œë ˆì´ì–´ê°€ ê³µê²©ê±°ë¦¬ë‚´ì— ë“¤ì–´ì˜¨ ê²½ìš°
         {
             print("Move > Attack");
             //canAttack = true;
             e_state = EnemyState.Attack;
         }
-        //ÃÊ±â À§Ä¡¿¡¼­ ¹ş¾î³­ °æ¿ì
+        //ì´ˆê¸° ìœ„ì¹˜ì—ì„œ ë²—ì–´ë‚œ ê²½ìš°
         else if (Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
-        //ÀÌµ¿Áß º¹±Í°Å¸® ÀÌ»ó ÀÌµ¿ÇÑ °æ¿ì
+        //ì´ë™ì¤‘ ë³µê·€ê±°ë¦¬ ì´ìƒ ì´ë™í•œ ê²½ìš°
         {
             //canAttack = false;
             nMa.stoppingDistance = 0.001f;
@@ -177,7 +177,7 @@ public class Enemy2FSM : MonoBehaviour
         BossGunAni.SetTrigger("Weapon_Spin");
         BossAni.SetBool("Boss_Finded", true);
         yield return new WaitForSeconds(enemyAttackspeed);
-        //°ø°İ ¹üÀ§¿¡¼­ ¹ş¾î³­ °æ¿ì
+        //ê³µê²© ë²”ìœ„ì—ì„œ ë²—ì–´ë‚œ ê²½ìš°
         if (targetTrackingdistance > enemyAttackDistance)
         {
             print("Attack > Move");
@@ -199,7 +199,7 @@ public class Enemy2FSM : MonoBehaviour
         nMa.ResetPath();
         nMa.SetDestination(originalPos);
 
-        //º¹±ÍÈÄ idle»óÅÂ·Î º¯°æÁ¶°Ç                                                    
+        //ë³µê·€í›„ idleìƒíƒœë¡œ ë³€ê²½ì¡°ê±´                                                    
         if (Vector3.Distance(transform.position, originalPos) < 0.2f)
         {
             nMa.isStopped = true;
