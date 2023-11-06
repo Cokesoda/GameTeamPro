@@ -321,8 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3a8abaf8443934caccc9d471b5403c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2967618164031913940, guid: 18880d402a96edc4a88752e55035f90c, type: 3}
-  enemy: {fileID: 1458463364202937710, guid: ec168a431f04c6146a1d934638dc26c4, type: 3}
 --- !u!54 &-8317982286792547450
 Rigidbody:
   m_ObjectHideFlags: 0
