@@ -6625,7 +6625,7 @@ RectTransform:
   m_Father: {fileID: 1618473567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8559,6 +8559,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926253079}
   m_CullTransparentMesh: 1
+--- !u!224 &937833845 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8129122912302721328, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
+  m_PrefabInstance: {fileID: 1181466772}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &952378326 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1677849371157650053, guid: 4048de2afe8a9414198e05d03e8e4dc2, type: 3}
@@ -8583,7 +8588,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.12
+  m_Radius: 0.06
   m_Height: 0.31
   m_Direction: 1
   m_Center: {x: 0, y: 0.15021802, z: -0.0000000027939677}
@@ -9274,6 +9279,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 952378326}
+    - target: {fileID: 390318505552227334, guid: ec168a431f04c6146a1d934638dc26c4, type: 3}
+      propertyPath: enemyDietime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 390318505552227334, guid: ec168a431f04c6146a1d934638dc26c4, type: 3}
       propertyPath: enemyMovespeed
       value: 1
@@ -11473,7 +11482,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1724209547}
     m_Modifications:
     - target: {fileID: 1062598821511794604, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
       propertyPath: m_IsActive
@@ -11481,11 +11490,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5587737664954933115, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7334143707129544042, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: PlayerUI
       objectReference: {fileID: 0}
     - target: {fileID: 7334143707129544042, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
       propertyPath: m_IsActive
@@ -11569,6 +11578,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8129122912302721328, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046556736401971264, guid: fa90d4c406ea31b4383ac8d72f37119f, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -13970,6 +13983,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.18540095
       objectReference: {fileID: 0}
+    - target: {fileID: 1460261861647295496, guid: 4048de2afe8a9414198e05d03e8e4dc2, type: 3}
+      propertyPath: m_Height
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460261861647295496, guid: 4048de2afe8a9414198e05d03e8e4dc2, type: 3}
+      propertyPath: m_Radius
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1677849371157650053, guid: 4048de2afe8a9414198e05d03e8e4dc2, type: 3}
       propertyPath: m_Name
       value: Player_Dummy
@@ -15793,7 +15814,7 @@ RectTransform:
   m_Father: {fileID: 981535062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18117,7 +18138,7 @@ RectTransform:
   m_Father: {fileID: 686565733}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18174,7 +18195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1724209547
 Transform:
   m_ObjectHideFlags: 0
@@ -18199,6 +18220,7 @@ Transform:
   - {fileID: 1675653947}
   - {fileID: 1666967268}
   - {fileID: 1110784909}
+  - {fileID: 937833845}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1726578000
@@ -20087,6 +20109,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 952378326}
     - target: {fileID: 390318505552227334, guid: ec168a431f04c6146a1d934638dc26c4, type: 3}
+      propertyPath: enemyDietime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 390318505552227334, guid: ec168a431f04c6146a1d934638dc26c4, type: 3}
       propertyPath: enemyMovespeed
       value: 1
       objectReference: {fileID: 0}
@@ -20631,7 +20657,7 @@ RectTransform:
   m_Father: {fileID: 2082930238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22593,7 +22619,6 @@ SceneRoots:
   - {fileID: 235098490}
   - {fileID: 1500516226409727546}
   - {fileID: 889892289}
-  - {fileID: 1181466772}
   - {fileID: 1875408375}
   - {fileID: 1017408445}
   - {fileID: 1724209547}
