@@ -12,6 +12,7 @@ TagManager:
   - Pillow
   - Weapon
   - Book
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Bullet
   - Enemy
   - Player
-  - 
+  - Item
   - 
   - 
   - 

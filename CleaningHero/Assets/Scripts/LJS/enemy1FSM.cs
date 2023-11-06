@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 public class Enemy1FSM : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject item; // 적 파괴시 생성할 아이템 프리팹
+
+    [SerializeField]
+    private int count;  // 적 파괴시 생성할 아이템 갯수
+
     public GameObject player;
     NavMeshAgent nMa;
     public GameObject bulletObj;
@@ -42,7 +48,7 @@ public class Enemy1FSM : MonoBehaviour
     Vector3 originalRot;                     //기본 생성위치 로테이션 값
     public float HPcurrentTime = 0;
 
-    EnemyState e_state;
+    public EnemyState e_state;
     public enum EnemyState
     {
         Idle,
@@ -50,12 +56,14 @@ public class Enemy1FSM : MonoBehaviour
         Attack,
         Return,
         Hit,
-        Die
+        Die,
+        item,
     }
 
     
     void Start()
     {
+        count = 5;
         nMa = GetComponent<NavMeshAgent>();
         //player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
@@ -109,9 +117,13 @@ public class Enemy1FSM : MonoBehaviour
             case EnemyState.Die:
                 State_Die();
                 break;
+            case EnemyState.item:
+                State_item();
+                break;
         }
     }
 
+    
 
     void State_Idle()
     {
@@ -249,7 +261,7 @@ public class Enemy1FSM : MonoBehaviour
         }
         else if(enemyHp < 0)
         {
-            e_state = EnemyState.Die;
+            e_state = EnemyState.item;
         }
     }
     IEnumerator HitState()
@@ -258,9 +270,23 @@ public class Enemy1FSM : MonoBehaviour
         print("Hit!" + enemyHp);
         yield return new WaitForSeconds(enemyHittime);
     }
+    private void State_item()
+    {
+        if (count > 0)
+        {
+            new GameObject("item");
+
+            count--;
+        }
+        if (count == 0)
+        {
+            e_state = EnemyState.Die;
+        }
+    }
     void State_Die()
     {
         legoAni.SetBool("Lego_Alive", false);
         Destroy(gameObject, enemyDietime);
     }
+   
 }
