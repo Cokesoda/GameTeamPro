@@ -24,10 +24,11 @@ public class PlayerFire : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         playerstatus = gamemanager.GetComponent<LMstatus>();
     }
-
     // Update is called once per frame
     void Update()
     {
+
+        Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward, Color.red);
         isHit = false;
         if (GameManager.gm.gState != GameManager.GameState.Run)
         {

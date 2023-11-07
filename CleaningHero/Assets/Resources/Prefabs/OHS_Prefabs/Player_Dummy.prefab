@@ -194,9 +194,7 @@ MonoBehaviour:
   moveSpeed: 3
   jumpPower: 10
   isJumping: 0
-  hp: 20
-  hpSlider: {fileID: 0}
-  hitEffect: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!143 &1460261861647295496
 CharacterController:
   m_ObjectHideFlags: 0
@@ -216,13 +214,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 0.3
+  m_Height: 0.25
   m_Radius: 0.05
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.2
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0.12, z: 0}
 --- !u!114 &5221650634342015596
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -64,13 +64,13 @@ public class Enemy1FSM : MonoBehaviour
         legoAni = GetComponent<Animator>();
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, enemyFindDistance);
         Gizmos.DrawWireSphere(transform.position, enemyAttackDistance);
         Gizmos.DrawWireSphere(transform.position, enemyReturnDistance);
-    }
+    }*/
 
     void Update()
     {
