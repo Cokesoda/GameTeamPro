@@ -18460,7 +18460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8594548456001669089, guid: 27d6105a86835f34fae3ba328bb2e67a, type: 3}
       propertyPath: playerAttackDamage
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8594548456001669089, guid: 27d6105a86835f34fae3ba328bb2e67a, type: 3}
       propertyPath: playerAttackDistance

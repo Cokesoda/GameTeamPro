@@ -235,7 +235,7 @@ public class Enemy1FSM : MonoBehaviour
             StartCoroutine(HitState());
             e_state = EnemyState.Move;
         }
-        else if(enemyHp < 0)
+        else if(enemyHp <= 0)
         {
             e_state = EnemyState.Die;
         }

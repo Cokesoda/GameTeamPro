@@ -84,10 +84,10 @@ public class Enemy2FSM : MonoBehaviour
         {
             e_state = EnemyState.Hit;
         }
-        /*if (enemyHp <= 0)
+        if (enemyHp <= 0)
         {
             e_state = EnemyState.Die;
-        }*/
+        }
         enemyHpSlider.value = enemyHp / enemyMaxHp;
         
         switch (e_state)
@@ -215,20 +215,9 @@ public class Enemy2FSM : MonoBehaviour
         {
             e2isHit = false;
             StartCoroutine(HitState());
-            if(targetTrackingdistance > enemyFindDistance)
-            {
-                e_state = EnemyState.Idle;
-            }
-            else if(targetTrackingdistance < enemyFindDistance && targetTrackingdistance > enemyAttackDistance)
-            {
-                e_state = EnemyState.Move;
-            }
-            else if(targetTrackingdistance < enemyAttackDistance)
-            {
-                e_state = EnemyState.Attack;
-            }
+            e_state = EnemyState.Move;
         }
-        else
+        else if (enemyHp <= 0)
         {
             e_state = EnemyState.Die;
         }
@@ -239,15 +228,9 @@ public class Enemy2FSM : MonoBehaviour
         yield return new WaitForSeconds(enemyHittime);
     }
 
-    private void State_Die()//죽음 상태 함수
+    void State_Die()//죽음 상태 함수
     {
-        StartCoroutine(DieState());
-    }
-
-    IEnumerator DieState()//죽음 코루틴
-    {
-        BossAni.SetTrigger("Boss_Die");
-        yield return new WaitForSeconds(enemyDietime);
-        Destroy(gameObject);
+        BossAni.SetBool("Boss_alive", false);
+        Destroy(gameObject, enemyDietime);
     }
 }
