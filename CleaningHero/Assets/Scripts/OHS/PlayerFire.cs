@@ -15,7 +15,8 @@ public class PlayerFire : MonoBehaviour
     //ParticleSystem ps;
     Animator anim;
     LMstatus playerstatus;
-    public GameObject enemyTag;
+    public GameObject enemy1Tag;
+    public GameObject enemy2Tag;
 
     // Start is called before the first frame update
     void Start()
@@ -50,13 +51,20 @@ public class PlayerFire : MonoBehaviour
             if(Physics.Raycast(firePosition.transform.position, Camera.main.transform.forward, out hitInfo, playerstatus.playerAttackDistance))
             {
                 Debug.DrawRay(firePosition.transform.position, Camera.main.transform.forward,Color.red);
-                if (hitInfo.collider.tag == enemyTag.tag)
+                if (hitInfo.collider.tag == enemy1Tag.tag)
                 {
                     //isHit = true;
-                    Debug.Log("==============");
-                    Enemy1FSM eFSM = hitInfo.collider.GetComponent<Enemy1FSM>();
-                    eFSM.enemyHp -= playerstatus.playerAttackDamage;
-                    eFSM.isHit = true;
+                    Debug.Log("Hit target = Enemy1");
+                    Enemy1FSM e1FSM = hitInfo.collider.GetComponent<Enemy1FSM>();
+                    e1FSM.enemyHp -= playerstatus.playerAttackDamage;
+                    e1FSM.e1isHit = true;
+                }
+                else if(hitInfo.collider.tag == enemy2Tag.tag)
+                {
+                    Debug.Log("Hit target = Enemy2");
+                    Enemy2FSM e2FSM = hitInfo.collider.GetComponent<Enemy2FSM>();
+                    e2FSM.enemyHp -= playerstatus.playerAttackDamage;
+                    e2FSM.e2isHit = true;
                 }
                 else
                 {

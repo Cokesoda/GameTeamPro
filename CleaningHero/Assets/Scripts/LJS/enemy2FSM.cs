@@ -16,7 +16,7 @@ public class Enemy2FSM : MonoBehaviour
     public Slider enemyHpSlider;
     public GameObject bossModel;
 
-    public bool isHit = false;
+    public bool e2isHit = false;
 
     [Range(5, 0.1f)]
     public float enemyFindDistance = 0.5f;   //적 인식 거리
@@ -80,12 +80,16 @@ public class Enemy2FSM : MonoBehaviour
         {
             HPcurrentTime = 0;
         }
-
-        enemyHpSlider.value = enemyHp / enemyMaxHp;
-        if (isHit)
+        if (e2isHit)
         {
             e_state = EnemyState.Hit;
         }
+        /*if (enemyHp <= 0)
+        {
+            e_state = EnemyState.Die;
+        }*/
+        enemyHpSlider.value = enemyHp / enemyMaxHp;
+        
         switch (e_state)
         {
             case EnemyState.Idle:
@@ -122,7 +126,7 @@ public class Enemy2FSM : MonoBehaviour
             e_state = EnemyState.Move;
             print("Idle > Move");
         }
-        else if (isHit)
+        else if (e2isHit)
         {
             print("Hit!");
             e_state = EnemyState.Hit;
@@ -185,10 +189,6 @@ public class Enemy2FSM : MonoBehaviour
             BossGunAni.SetTrigger("Weapon_RSpin");
             e_state = EnemyState.Move;
         }
-        else
-        {
-            //canAttack = true;
-        }
     }
     void State_Return()
     {
@@ -213,6 +213,7 @@ public class Enemy2FSM : MonoBehaviour
     {
         if (enemyHp > 0)
         {
+            e2isHit = false;
             StartCoroutine(HitState());
             if(targetTrackingdistance > enemyFindDistance)
             {
@@ -232,20 +233,21 @@ public class Enemy2FSM : MonoBehaviour
             e_state = EnemyState.Die;
         }
     }
-    IEnumerator HitState()
+    IEnumerator HitState()//피격 코루틴
     {
         BossAni.SetTrigger("Boss_Hit");
         yield return new WaitForSeconds(enemyHittime);
     }
-    private void State_Die()
+
+    private void State_Die()//죽음 상태 함수
     {
         StartCoroutine(DieState());
     }
-    IEnumerator DieState()
+
+    IEnumerator DieState()//죽음 코루틴
     {
         BossAni.SetTrigger("Boss_Die");
         yield return new WaitForSeconds(enemyDietime);
         Destroy(gameObject);
     }
-
 }
