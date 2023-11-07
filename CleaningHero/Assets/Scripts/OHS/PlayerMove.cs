@@ -10,16 +10,11 @@ public class PlayerMove : MonoBehaviour
     public float jumpPower = 4f;
     public bool isJumping = false;
     
-    public int hp = 20;
-    int maxHp = 20;
-    public Slider hpSlider;
-
     CharacterController cc;
 
     float gravity = -3f;
     float yVelocity = 0;
 
-    public GameObject hitEffect;
     Animator anim;
 
     private RaycastHit hitInfo;
@@ -27,9 +22,13 @@ public class PlayerMove : MonoBehaviour
     //private bool pickupActivated = false;
     //private LayerMask layerMask;
 
+    public GameObject gameManager;
+    LMstatus playerStatus;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerStatus = gameManager.GetComponent<LMstatus>();
         cc = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -37,8 +36,10 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hpSlider.value = (float)hp / (float)maxHp;
-
+        /*if (HitManager.PlayerisHit == true)
+        {
+            StartCoroutine(PlayHitEffect());
+        }*/
         if (GameManager.gm.gState != GameManager.GameState.Run)
         {
             return;
@@ -116,25 +117,19 @@ public class PlayerMove : MonoBehaviour
 
         }
     }
-
-    public void DamageAction(int damage)
-    {
-        hp -= damage;
-
-        if (hp > 0)
-        {
-            StartCoroutine(PlayHitEffect());
-        }
-    }
-
+    
     IEnumerator PlayHitEffect()
     {
-        hitEffect.SetActive(true);
-        if (anim.GetFloat("MoveMotion") == 0)
-        {
-            anim.SetTrigger("Damage");
-        }
+        anim.SetTrigger("Damage");
+        playerStatus.playerHp -= 1;
         yield return new WaitForSeconds(0.3f);
-        hitEffect.SetActive(false);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Lego_block" || other.name == "enemy2Bullet")
+        {
+            print("Bullet_Hit");
+            StartCoroutine(PlayHitEffect());
+        }
     }
 }

@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     PlayerMove player;
 
     public GameObject gameOption;
-
     private void Awake()
     {
         if (gm == null)
@@ -34,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         gState = GameState.Ready;
         StartCoroutine(ReadyToStart());
-        player = GameObject.Find("Player(Dummy)").GetComponent<PlayerMove>();
+        player = GameObject.Find("Player_Dummy").GetComponent<PlayerMove>();
     }
 
     IEnumerator ReadyToStart()
@@ -49,15 +48,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.hp <= 10)
-        {
-            //gameLabel.SetActive(true);
-            //gameText.text = "Game Over";
-            //gameText.color = new Color32(255, 0, 0, 255);
-            gState = GameState.GameOver;
-        }
-
-        if (player.hp <= 0)
+        /*if (player.hp <= 0)
         {
             player.GetComponentInChildren<Animator>().SetFloat("MoveMotion", 0f);
 
@@ -68,7 +59,7 @@ public class GameManager : MonoBehaviour
             //buttons.gameObject.SetActive(true);
 
             gState = GameState.GameOver;
-        }
+        }*/
     }
 
     public void OpenOptionWindow()
