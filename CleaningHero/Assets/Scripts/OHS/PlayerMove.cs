@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour
     
     CharacterController cc;
 
-    float gravity = -3f;
+    float gravity = -2.5f;
     float yVelocity = 0;
 
     Animator anim;
@@ -45,8 +45,8 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
 
         Vector3 dir = new Vector3(h, 0, v);
         dir = dir.normalized;
@@ -65,12 +65,12 @@ public class PlayerMove : MonoBehaviour
         }
         if(Input.GetButtonDown("Jump") && !isJumping)
         {
-            /*
+            
             if (anim.GetFloat("MoveMotion") == 0)
             {
                 anim.SetTrigger("Jump");
             }
-            */
+            
             yVelocity = jumpPower / 15;
             isJumping = true;
         }
