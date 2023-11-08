@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6194771975673631129}
   - component: {fileID: -3386938640008925976}
   - component: {fileID: 8822316671280116497}
+  - component: {fileID: 3103196852148175319}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Enemy2
@@ -97,7 +98,7 @@ MonoBehaviour:
   shotPos: {fileID: 6794804933444902028}
   enemyHpSlider: {fileID: 7259994125753762528}
   bossModel: {fileID: 4220793737128430435}
-  isHit: 0
+  e2isHit: 0
   enemyFindDistance: 1.8
   enemyAttackDistance: 1.5
   enemyReturnDistance: 0.5
@@ -106,7 +107,7 @@ MonoBehaviour:
   enemyMaxHp: 101
   enemyAttackspeed: 2
   enemyMovespeed: 0.268
-  enemyHittime: 2
+  enemyHittime: 0.14
   enemyDietime: 2
   enemyHealtime: 1.1
   enemyHealing: 10
@@ -125,6 +126,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPos: {fileID: 6794804933444902028}
   enemy2Bullet: {fileID: 7937063882594014453, guid: dcaa2883326715c45b0a76a6308605be, type: 3}
+--- !u!136 &3103196852148175319
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563648314789040913}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.04
+  m_Height: 0.35
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.175, z: 0}
 --- !u!1 &2795645875088639328
 GameObject:
   m_ObjectHideFlags: 0

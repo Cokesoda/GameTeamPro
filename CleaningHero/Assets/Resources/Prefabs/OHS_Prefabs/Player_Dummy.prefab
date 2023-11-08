@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 3313321096269957420}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0988, z: 0.7312}
+  m_LocalPosition: {x: 0, y: -0.0988, z: 0.6295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -192,11 +192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  jumpPower: 10
+  jumpPower: 15
   isJumping: 0
-  hp: 20
-  hpSlider: {fileID: 0}
-  hitEffect: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!143 &1460261861647295496
 CharacterController:
   m_ObjectHideFlags: 0
@@ -216,13 +214,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 0.3
+  m_Height: 0.25
   m_Radius: 0.05
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.2
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0.12, z: 0}
 --- !u!114 &5221650634342015596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +239,8 @@ MonoBehaviour:
   ShotEx: {fileID: 0}
   HitEx: {fileID: 0}
   ExOriginalPos: {fileID: 0}
-  enemyTag: {fileID: 1458463364202937710, guid: ec168a431f04c6146a1d934638dc26c4, type: 3}
+  enemy1Tag: {fileID: 1458463364202937710, guid: ec168a431f04c6146a1d934638dc26c4, type: 3}
+  enemy2Tag: {fileID: 1563648314789040913, guid: 5fee763b8cbc67147aea44db2864e3c1, type: 3}
 --- !u!136 &4559081070899907549
 CapsuleCollider:
   m_ObjectHideFlags: 0

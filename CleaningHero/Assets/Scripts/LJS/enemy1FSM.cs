@@ -21,7 +21,7 @@ public class Enemy1FSM : MonoBehaviour
     public Slider enemyHpSlider;
     int ranattack;
 
-    public bool isHit = false;
+    public bool e1isHit = false;
 
 
     [Range(5, 0.1f)]
@@ -44,7 +44,6 @@ public class Enemy1FSM : MonoBehaviour
 
     float targetTrackingdistance;
     Vector3 originalPos;                     //기존 생성위치 포지션 값
-    Vector3 originalRot;                     //기본 생성위치 로테이션 값
     public float HPcurrentTime = 0;
 
     public EnemyState e_state;
@@ -71,13 +70,13 @@ public class Enemy1FSM : MonoBehaviour
         legoAni = GetComponent<Animator>();
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, enemyFindDistance);
         Gizmos.DrawWireSphere(transform.position, enemyAttackDistance);
         Gizmos.DrawWireSphere(transform.position, enemyReturnDistance);
-    }
+    }*/
 
     void Update()
     {
@@ -87,7 +86,7 @@ public class Enemy1FSM : MonoBehaviour
         {
             HPcurrentTime = 0;
         }
-        if (isHit)
+        if (e1isHit)
         {
             e_state = EnemyState.Hit;
         }
@@ -95,7 +94,9 @@ public class Enemy1FSM : MonoBehaviour
         {
             e_state = EnemyState.Die;
         }
-        enemyHpSlider.value = enemyHp / enemyMaxHp;
+
+        enemyHpSlider.value = enemyHp / enemyMaxHp;//체력바
+
         switch (e_state)
         {
             case EnemyState.Idle:
@@ -173,12 +174,6 @@ public class Enemy1FSM : MonoBehaviour
             //print("Move > Attack");
             e_state = EnemyState.Attack;
         }
-        else if (isHit == true)
-        {
-            //print("Hit!");
-            e_state = EnemyState.Hit;
-            isHit = false;
-        }
         //초기 위치에서 벗어난 경우
         else if(Vector3.Distance(originalPos, transform.position) > enemyReturnDistance)
             //이동중 복귀거리 이상 이동한 경우
@@ -198,14 +193,7 @@ public class Enemy1FSM : MonoBehaviour
     }
     IEnumerator EAttack()
     {
-        if (isHit == true)
-        {
-            //print("Hit!");
-            e_state = EnemyState.Hit;
-            isHit = false;
-        }
-        //현재거리 / 공격거리 / 인식거리
-        else if (targetTrackingdistance < enemyAttackDistance)
+        if (targetTrackingdistance < enemyAttackDistance)
         {
             legoAni.SetTrigger("Lego_Attack");
             legoAni.SetBool("Lego_canAttack", true);
@@ -254,11 +242,11 @@ public class Enemy1FSM : MonoBehaviour
     {
         if(enemyHp > 0)
         {
-            isHit = false;
+            e1isHit = false;
             StartCoroutine(HitState());
             e_state = EnemyState.Move;
         }
-        else if(enemyHp < 0)
+        else if(enemyHp <= 0)
         {
             e_state = EnemyState.item;
         }
@@ -281,3 +269,4 @@ public class Enemy1FSM : MonoBehaviour
     }
    
 }
+
