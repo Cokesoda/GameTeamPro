@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartTuto : MonoBehaviour
 {
     public GameObject HP;
     public GameObject Item;
-    public GameObject bullet;
-    public GameObject Time;
+    public GameObject time;
     public GameObject InGame;
     public GameObject Key;
     public GameObject Inventory;
     void Start()
     {
+       
         HP.SetActive(true);
         Item.SetActive(false);
-        bullet.SetActive(false);
-        Time.SetActive(false);
+        time.SetActive(false);
         Key.SetActive(false);
         InGame.SetActive(false);
         Inventory.SetActive(false);
@@ -38,22 +38,15 @@ public class StartTuto : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 Item.SetActive(false);
-                bullet.SetActive(true);
+                time.SetActive(true);
             }
         }
-        else if (bullet.activeSelf == true)
+        
+        else if (time.activeSelf == true)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-                bullet.SetActive(false);
-                Time.SetActive(true);
-            }
-        }
-        else if (Time.activeSelf == true)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-                Time.SetActive(false);
+                time.SetActive(false);
                 Key.SetActive(true);
             }
         }
@@ -63,6 +56,7 @@ public class StartTuto : MonoBehaviour
             {
                 Key.SetActive(false);
                 InGame.SetActive(true);
+                
             }
         }
     }

@@ -64,23 +64,27 @@ public class TutoOption : MonoBehaviour
                         }
                         else
                         {
+                            Time.timeScale = 1f;
                             gameOption.SetActive(false);
                             inGame.SetActive(true);
                         }
                     }
                     else
                     {
+                        Time.timeScale = 0f;
                         gameOption.SetActive(true);
                         inGame.SetActive(false);
                     }
                 }
                 else
                 {
+                    Time.timeScale = 1f;
                     Inven.SetActive(false);
                 }
             }
             else if (Succese.activeSelf == false && Fail.activeSelf == false)
             {
+                Time.timeScale = 1f;
                 enchant.SetActive(false);
                 inGame.SetActive(true);
             }
@@ -116,6 +120,7 @@ public class TutoOption : MonoBehaviour
     }
     public void CloseOptionWindow()
     {
+        Time.timeScale = 1f;
         gameOption.SetActive(false);
         inGame.SetActive(true);
     }
@@ -149,14 +154,17 @@ public class TutoOption : MonoBehaviour
 
     public void OnclickCloseInven()
     {
+        Time.timeScale = 1f;
         Inven.SetActive(false);
     }
     public void OnClickClear()
     {
+        Time.timeScale = 0f;
         Result.SetActive(true);
     }
     public void OnClickResult()
     {
+        Time.timeScale = 0f;
         SceneManager.LoadScene(SceneNumber + 1);
     }
 }

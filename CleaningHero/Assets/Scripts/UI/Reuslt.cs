@@ -19,6 +19,7 @@ public class Reuslt : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                Time.timeScale = 0f;
                 result.SetActive(true);
             }
         }
