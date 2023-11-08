@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ReadyToStart()
     {
-        //yield return new WaitForSeconds(2f);
-        //gameText.text = "Go!";
         yield return new WaitForSeconds(0.5f);
         //gameLabel.SetActive(false);
         gState = GameState.Run;

@@ -60,7 +60,7 @@ public class TutoOption : MonoBehaviour
                         }
                         else if (puzzle.activeSelf == true)
                         {
-                            gameOption.SetActive(false);
+                            puzzle.SetActive(false);
                         }
                         else
                         {

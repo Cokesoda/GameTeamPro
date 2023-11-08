@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SLot : MonoBehaviour
+public class SLot1 : MonoBehaviour
 {
     public Item item; // »πµÊ«— æ∆¿Ã≈€
     public int itemCount; // »πµÊ«— æ∆¿Ã≈€¿« ∞≥ºˆ
@@ -28,7 +28,7 @@ public class SLot : MonoBehaviour
         itemCount = _count;
         itemImage.sprite = item.itemImage;
 
-        if (item.itemType != Item.ItemType.wrapon && item.itemType != Item.ItemType.ETC)
+        if (item.itemType != Item.ItemType.wrapon && item.itemType != Item.ItemType.Used)
         {
             text_Count.text = itemCount.ToString();
         }

@@ -86,9 +86,9 @@ GameObject:
   - component: {fileID: 7109940491425512058}
   - component: {fileID: 5835724148248807319}
   - component: {fileID: 1198301348473903349}
-  - component: {fileID: 560480344028934952}
+  - component: {fileID: 2528305374041408153}
   m_Layer: 5
-  m_Name: ItemSlot
+  m_Name: ItemSlot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &560480344028934952
+--- !u!114 &2528305374041408153
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,14 +162,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3062631259992105342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41044b2f829d9c441ad8d104d9b304da, type: 3}
+  m_Script: {fileID: 11500000, guid: c57188ed41f02aa4e930aa2525822d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   itemCount: 0
   itemImage: {fileID: 2480924163697409405}
-  text_count: {fileID: 7246144499027190318}
-  go_CountImage: {fileID: 0}
+  text_Count: {fileID: 7246144499027190318}
 --- !u!1 &4201172149145447405
 GameObject:
   m_ObjectHideFlags: 0

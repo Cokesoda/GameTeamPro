@@ -11,7 +11,6 @@ public class Enemy1FSM : MonoBehaviour
     private GameObject item; // 적 파괴시 생성할 아이템 프리팹
 
     [SerializeField]
-    private int count;  // 적 파괴시 생성할 아이템 갯수
 
     public GameObject player;
     NavMeshAgent nMa;
@@ -63,7 +62,7 @@ public class Enemy1FSM : MonoBehaviour
     
     void Start()
     {
-        count = 5;
+        item.SetActive(false);
         nMa = GetComponent<NavMeshAgent>();
         //player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
@@ -272,16 +271,8 @@ public class Enemy1FSM : MonoBehaviour
     }
     private void State_item()
     {
-        if (count > 0)
-        {
-            new GameObject("item");
-
-            count--;
-        }
-        if (count == 0)
-        {
-            e_state = EnemyState.Die;
-        }
+        item.SetActive(true);
+        e_state = EnemyState.Die;
     }
     void State_Die()
     {
