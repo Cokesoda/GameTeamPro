@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class Enemy1FSM : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject item; // 적 파괴시 생성할 아이템 프리팹
 
     [SerializeField]
 
@@ -55,13 +53,11 @@ public class Enemy1FSM : MonoBehaviour
         Return,
         Hit,
         Die,
-        item,
     }
 
     
     void Start()
     {
-        item.SetActive(false);
         nMa = GetComponent<NavMeshAgent>();
         //player = GameObject.FindGameObjectWithTag("Player");//메인 캐릭터 Tag 변경 *중요
         originalPos = transform.position;                   //생성된 위치를 초기위치로 저장
@@ -116,9 +112,6 @@ public class Enemy1FSM : MonoBehaviour
                 break;
             case EnemyState.Die:
                 State_Die();
-                break;
-            case EnemyState.item:
-                State_item();
                 break;
         }
     }
@@ -248,7 +241,7 @@ public class Enemy1FSM : MonoBehaviour
         }
         else if(enemyHp <= 0)
         {
-            e_state = EnemyState.item;
+            e_state = EnemyState.Die;
         }
     }
     IEnumerator HitState()
@@ -256,11 +249,6 @@ public class Enemy1FSM : MonoBehaviour
         legoAni.SetTrigger("Lego_Hit");
         print("Hit!" + enemyHp);
         yield return new WaitForSeconds(enemyHittime);
-    }
-    private void State_item()
-    {
-        item.SetActive(true);
-        e_state = EnemyState.Die;
     }
     void State_Die()
     {
