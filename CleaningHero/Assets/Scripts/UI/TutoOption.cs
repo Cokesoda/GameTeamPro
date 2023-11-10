@@ -21,6 +21,8 @@ public class TutoOption : MonoBehaviour
     public GameObject puzzle;
     public int SceneNumber;
 
+    private RectTransform invenRec;
+
     public enum GameState   ///test
     { 
     Ready,
@@ -37,7 +39,9 @@ public class TutoOption : MonoBehaviour
 
         gameOption.SetActive(false);
         keySet.SetActive(false);
-        Inven.SetActive(false);
+        //Inven.SetActive(false);
+        invenRec = Inven.GetComponent<RectTransform>();
+        invenRec.anchoredPosition = new Vector3(900, 0, 0);
         Result.SetActive(false);
         enchant.SetActive(false);
         puzzle.SetActive(false);
@@ -79,7 +83,7 @@ public class TutoOption : MonoBehaviour
                 else
                 {
                     Time.timeScale = 1f;
-                    Inven.SetActive(false);
+                    //Inven.SetActive(false);
                 }
             }
             else if (Succese.activeSelf == false && Fail.activeSelf == false)
@@ -99,7 +103,8 @@ public class TutoOption : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Inven.SetActive(true);
+            invenRec = Inven.GetComponent<RectTransform>();
+            invenRec.anchoredPosition = new Vector3(0, 0, 0);
         }
         if (Result.activeSelf == true)
         {
@@ -155,7 +160,8 @@ public class TutoOption : MonoBehaviour
     public void OnclickCloseInven()
     {
         Time.timeScale = 1f;
-        Inven.SetActive(false);
+        invenRec = Inven.GetComponent<RectTransform>();
+        invenRec.anchoredPosition = new Vector3(900, 0, 0);
     }
     public void OnClickClear()
     {

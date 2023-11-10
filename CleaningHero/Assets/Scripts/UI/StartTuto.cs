@@ -19,7 +19,7 @@ public class StartTuto : MonoBehaviour
         time.SetActive(false);
         Key.SetActive(false);
         InGame.SetActive(false);
-        Inventory.SetActive(false);
+        //Inventory.SetActive(false);
     }
 
     // Update is called once per frame

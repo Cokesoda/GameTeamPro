@@ -6,10 +6,8 @@ public class Inventory : MonoBehaviour
 {
     public static bool invectoryActivated = false;  // 인벤토리 활성화 여부. true가 되면 카메라 움직임과 다른 입력을 막을 것이다.
 
-    [SerializeField] 
-    private GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
-    [SerializeField]
-    private GameObject go_SlotsParent1;  // Slot들의 부모인 Grid Setting 
+    public GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
+    public GameObject go_SlotsParent1;  // Slot들의 부모인 Grid Setting 
 
     private SLot[] slots;
     private SLot1[] slots1;// 슬롯들 배열
@@ -20,12 +18,6 @@ public class Inventory : MonoBehaviour
         slots = go_SlotsParent.GetComponentsInChildren<SLot>();
         slots1 = go_SlotsParent1.GetComponentsInChildren<SLot1>();
     }
-
-    void Update()
-    {
-    }
-
-    
 
     public void AcquireItem(Item _item, int _count)
     {
