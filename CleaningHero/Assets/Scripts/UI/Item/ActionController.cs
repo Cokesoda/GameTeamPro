@@ -22,15 +22,19 @@ public class ActionController : MonoBehaviour
     float distance;
 
     [SerializeField]
-    private Inventory theInventory;  
+    private Inventory theInventory;
+
+    public Vector3 vec;
 
     
     private void Start()
     {
     }
     public void Update()
-  {
-        if (Input.GetKeyDown(KeyCode.E))
+    {
+        Physics.Raycast((transform.position + vec), Camera.main.transform.forward, out hitInfo);
+        Debug.DrawRay((transform.position + vec), Camera.main.transform.forward, Color.green);
+        if (Input.GetKeyDown(KeyCode.E) && hitInfo.transform.gameObject != null && hitInfo.transform.CompareTag("Item"))
         {
             CanPickUp();
         }
@@ -39,13 +43,10 @@ public class ActionController : MonoBehaviour
     {
         if(pickupActivated)
         {
-            if(hitInfo.transform != null)
-            {
-                Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 했습니다.");  // 인벤토리 넣기
-                theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item,1);
-                Destroy(hitInfo.transform.gameObject);
-                pickupActivated = false;
-            }
+            Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 했습니다.");  // 인벤토리 넣기
+            theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item,1);
+            Destroy(hitInfo.transform.gameObject);
+            pickupActivated = false;
         }
     }
 }
