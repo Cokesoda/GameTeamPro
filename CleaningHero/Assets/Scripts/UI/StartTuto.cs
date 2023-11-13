@@ -24,7 +24,8 @@ public class StartTuto : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   //¾À1 ½½·Ôº° »ç¿ë¹ý
+
         if (HP.activeSelf == true)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
