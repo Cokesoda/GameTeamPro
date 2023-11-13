@@ -63,3 +63,4 @@ MonoBehaviour:
   playerAttackDistance: 10
   playerAttackDamage: 10
   playerMoveSpeed: 10
+  PlayerisHit: 0

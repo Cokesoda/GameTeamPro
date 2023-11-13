@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CutScene2.unity
     guid: 6ff8655aae3bb454db4684a79fb39399
   - enabled: 1
+    path: Assets/Scenes/MainMergeScene2.unity
+    guid: 9b21dd9d43580e945b255e8ac94f6fed
+  - enabled: 0
     path: Assets/Scenes/Tutorial2.unity
     guid: d23aa68b4bd98934ead96b625ab41014
   m_configObjects: {}

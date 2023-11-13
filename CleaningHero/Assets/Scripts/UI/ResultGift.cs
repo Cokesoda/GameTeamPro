@@ -16,7 +16,7 @@ public class ResultGift : MonoBehaviour
     // Start is called before the first frame update
     public void OnClcikOK()
     {
-        theInventory.AcquireItem(item1,count1);
+        theInventory.AcquireItem(item1, count1);
         theInventory.AcquireItem(item2, count2);
     }
 }

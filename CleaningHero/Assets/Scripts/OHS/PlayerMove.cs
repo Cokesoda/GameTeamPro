@@ -54,7 +54,7 @@ public class PlayerMove : MonoBehaviour
         anim.SetFloat("MoveMotion", dir.magnitude);
         dir = Camera.main.transform.TransformDirection(dir);
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             InteractionCtrl();
         }
@@ -84,7 +84,11 @@ public class PlayerMove : MonoBehaviour
         //if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo))
         {
-            if (hitInfo.transform.tag == "ToyBox")
+            /*if (hitInfo.transform.tag == "NPC")               //NPC 강화 연결
+            {
+                
+            }*/
+            /*if (hitInfo.transform.tag == "ToyBox")
             {
                 Interaction("ToyBox");
             }
@@ -95,7 +99,7 @@ public class PlayerMove : MonoBehaviour
             if (hitInfo.transform.tag == "Book")
             {
                 Interaction("Book");
-            }
+            }*/
         }
     }
 
