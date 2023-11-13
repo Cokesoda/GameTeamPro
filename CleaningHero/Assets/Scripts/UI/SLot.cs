@@ -11,7 +11,7 @@ public class SLot : MonoBehaviour
 
     [SerializeField]
     private Text text_Count;
-    [SerializeField]
+
 
     // 아이템 이미지의 투명도 조절
     private void SetColor(float _alpha)
@@ -35,6 +35,27 @@ public class SLot : MonoBehaviour
         else
         {
             text_Count.text = "0";
+        }
+
+        SetColor(1);
+    }
+
+    public void UseItem()
+    {
+        itemCount--;
+
+        if (item.itemType != Item.ItemType.wrapon && item.itemType != Item.ItemType.ETC)
+        {
+            text_Count.text = itemCount.ToString();
+        }
+        else
+        {
+            text_Count.text = "0";
+        }
+
+        if(itemCount <= 0)
+        {
+            ClearSlot();
         }
 
         SetColor(1);
