@@ -25,9 +25,14 @@ public class PlayerMove : MonoBehaviour
     public GameObject gameManager;
     LMstatus playerStatus;
 
+    //public GameObject TutoManager;
+    //TutoManager TutoScript;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        //TutoScript = TutoManager.GetComponent<TutoManager>();
         playerStatus = gameManager.GetComponent<LMstatus>();
         cc = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
@@ -84,9 +89,9 @@ public class PlayerMove : MonoBehaviour
         //if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo))
         {
-            /*if (hitInfo.transform.tag == "NPC")               //NPC °­È­ ¿¬°á
+            /*if (hitInfo.transform.tag == "NPC")               //NPC Â°Â­ÃˆÂ­ Â¿Â¬Â°Ã¡
             {
-                
+                //TutoManager.OpenEnchantUi();
             }*/
             /*if (hitInfo.transform.tag == "ToyBox")
             {
