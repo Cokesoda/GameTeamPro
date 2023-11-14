@@ -254,11 +254,11 @@ public class Enemy1FSM : MonoBehaviour
         legoAni.SetBool("Lego_Alive", false);
         if(this.name == "Enemy1_Left")
         {
-            ItemPosSave.enemyLItem.transform.position = transform.position;
+            //ItemPosSave.enemyLItem.transform.position = transform.position;
         }
         else
         {
-            ItemPosSave.enemyRItem.transform.position = transform.position;
+            //ItemPosSave.enemyRItem.transform.position = transform.position;
         }
         Destroy(gameObject, enemyDietime);
     }

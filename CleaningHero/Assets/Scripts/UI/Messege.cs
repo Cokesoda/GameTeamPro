@@ -7,12 +7,16 @@ public class Messege : MonoBehaviour
     public GameObject ToT;
     public GameObject ToTNo;
     public GameObject ToTYes;
+    public GameObject Result;
+
     public void OnClickYes()
     {
         ToTYes.SetActive(true);
+
     }
     public void OnClickYesBtn()
     {
+        Result.SetActive(true);
         ToTYes.SetActive(false);
     }
 

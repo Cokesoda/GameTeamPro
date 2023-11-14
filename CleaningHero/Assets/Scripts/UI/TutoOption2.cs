@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TutoOption : MonoBehaviour
+public class TutoOption2 : MonoBehaviour
 {
     public GameObject inGame;
     public GameObject gameOption;
@@ -37,12 +37,12 @@ public class TutoOption : MonoBehaviour
     Gameover
     }
     // Start is called before the first frame update.
-    void Start()
+
+    private void Awake()
     {
+        Time.timeScale = 1f;
         SceneNumber = SceneManager.GetActiveScene().buildIndex;
-
         Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-
         gameOption.SetActive(false);
         keySet.SetActive(false);
         //Inven.SetActive(false);
@@ -52,6 +52,13 @@ public class TutoOption : MonoBehaviour
         enchant.SetActive(false);
         puzzle.SetActive(false);
     }
+    void Start()
+    {
+        Theinventory.AcquireItem(ResultItem1, 10);
+        Theinventory.AcquireItem(ResultItem2, 1);
+        Theinventory.AcquireItem(ResultItem3, 1);
+        Theinventory.AcquireItem(ResultItem4, 1);
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,8 +67,7 @@ public class TutoOption : MonoBehaviour
         {
             if (enchant.activeSelf == false)
             {
-                if (Inven.activeSelf == false)
-                {
+                
                     if (gameOption.activeSelf == true)
                     {
                         if (keySet.activeSelf == true)
@@ -81,14 +87,16 @@ public class TutoOption : MonoBehaviour
                     }
                     else
                     {
-                        Time.timeScale = 0f;
                         gameOption.SetActive(true);
                         inGame.SetActive(false);
+                        //Time.timeScale = 0f;
                     }
-                }
-                else
+                
+                if(invenRec.anchoredPosition.x == 0)
                 {
                     Time.timeScale = 1f;
+                    inGame.SetActive(true);
+                    invenRec.anchoredPosition = new Vector3(900, 0, 0);
                     //Inven.SetActive(false);
                 }
             }
@@ -111,6 +119,7 @@ public class TutoOption : MonoBehaviour
         {
             invenRec = Inven.GetComponent<RectTransform>();
             invenRec.anchoredPosition = new Vector3(0, 0, 0);
+            inGame.SetActive(false);
         }
         if (Result.activeSelf == true)
         {
@@ -178,10 +187,7 @@ public class TutoOption : MonoBehaviour
     {
         Time.timeScale = 0f;
         Result.SetActive(false);
-        Theinventory.AcquireItem(ResultItem1, 10);
-        Theinventory.AcquireItem(ResultItem2, 1);
-        Theinventory.AcquireItem(ResultItem3, 1);
-        Theinventory.AcquireItem(ResultItem4, 1);
+        
         SceneManager.LoadScene(SceneNumber + 1);
     }
 }
