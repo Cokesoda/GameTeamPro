@@ -138,7 +138,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Lego_block" || other.name == "enemy2Bullet")
+        if (other.name == "Lego_block" || other.tag == "Bullet")
         {
             print("Bullet_Hit");
             StartCoroutine(PlayHitEffect());
