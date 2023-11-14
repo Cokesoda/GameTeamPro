@@ -34,16 +34,17 @@ public class Inventory : MonoBehaviour
                     }
                 }
             }
-        }
-
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].item == null)
+            for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].AddItem(_item, _count);
-                return;
+                if (slots[i].item == null)
+                {
+                    slots[i].AddItem(_item, _count);
+                    return;
+                }
             }
         }
+
+        
         if (Item.ItemType.wrapon != _item.itemType && Item.ItemType.Used != _item.itemType)
         {
             for (int i = 0; i < slots1.Length; i++)
@@ -57,15 +58,16 @@ public class Inventory : MonoBehaviour
                     }
                 }
             }
-        }
-
-        for (int i = 0; i < slots1.Length; i++)
-        {
-            if (slots1[i].item == null)
+            for (int i = 0; i < slots1.Length; i++)
             {
-                slots1[i].AddItem(_item, _count);
-                return;
+                if (slots1[i].item == null)
+                {
+                    slots1[i].AddItem(_item, _count);
+                    return;
+                }
             }
         }
+
+        
     }
 }

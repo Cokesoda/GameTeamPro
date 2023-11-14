@@ -15,6 +15,7 @@ TagManager:
   - Item
   - none
   - NPC
+  - MusicBox
   layers:
   - Default
   - TransparentFX

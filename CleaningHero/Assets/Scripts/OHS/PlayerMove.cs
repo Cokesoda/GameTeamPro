@@ -25,14 +25,17 @@ public class PlayerMove : MonoBehaviour
     public GameObject gameManager;
     LMstatus playerStatus;
 
-    //public GameObject TutoManager;
-    //TutoManager TutoScript;
+    public GameObject enchant;
+    public GameObject musicBox;
+
+    public GameObject TutoManager;
+    TutoOption TutoScript;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //TutoScript = TutoManager.GetComponent<TutoManager>();
+        TutoScript = TutoManager.GetComponent<TutoOption>();
         playerStatus = gameManager.GetComponent<LMstatus>();
         cc = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
@@ -89,15 +92,15 @@ public class PlayerMove : MonoBehaviour
         //if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo))
         {
-            /*if (hitInfo.transform.tag == "NPC")               //NPC °­È­ ¿¬°á
+            if (hitInfo.transform.tag == "NPC")               
             {
-                //TutoManager.OpenEnchantUi();
-            }*/
-            /*if (hitInfo.transform.tag == "ToyBox")
-            {
-                Interaction("ToyBox");
+                enchant.SetActive(true);
             }
-            if (hitInfo.transform.tag == "Pillow")
+            if (hitInfo.transform.tag == "MusicBox")
+            {
+                musicBox.SetActive(true);
+            }
+            /*if (hitInfo.transform.tag == "Pillow")
             {
                 Interaction("Pillow");
             }
