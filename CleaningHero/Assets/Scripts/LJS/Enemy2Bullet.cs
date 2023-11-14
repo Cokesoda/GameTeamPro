@@ -9,7 +9,7 @@ public class Enemy2Bullet : MonoBehaviour
     void Start()
     {
         Lrb = GetComponent<Rigidbody>();
-        Lrb.AddRelativeForce(0, 0, 100);
+        Lrb.AddRelativeForce(0, -2, 100);
     }
     void OnCollisionEnter(Collision collision) //다른 오브젝트와 충돌했을 경우
     {
