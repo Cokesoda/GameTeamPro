@@ -9,7 +9,6 @@ public class Enemy1FSM : MonoBehaviour
 {
 
     [SerializeField]
-
     public GameObject player;
     NavMeshAgent nMa;
     public GameObject bulletObj;
@@ -253,6 +252,14 @@ public class Enemy1FSM : MonoBehaviour
     void State_Die()
     {
         legoAni.SetBool("Lego_Alive", false);
+        if(this.name == "Enemy1_Left")
+        {
+            ItemPosSave.enemyLItem.transform.position = transform.position;
+        }
+        else
+        {
+            ItemPosSave.enemyRItem.transform.position = transform.position;
+        }
         Destroy(gameObject, enemyDietime);
     }
    
