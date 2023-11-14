@@ -12,6 +12,8 @@ public class Enchant : MonoBehaviour
     public Image weapon;
     public GameObject puzzle;
     public GameObject InGame;
+    public GameObject text;
+    public SLot1 slot;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class Enchant : MonoBehaviour
     {
         enchant.SetActive(true);
         InGame.SetActive(false);
+        text.GetComponent<Text>().text = slot.itemCount + "/ 5";
     }
     public void OnClickPuzzle()
     {

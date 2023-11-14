@@ -11,9 +11,9 @@ public class Inventory : MonoBehaviour
 
     private SLot[] slots;
     private SLot1[] slots1;// ½½·Ôµé ¹è¿­
-    public int _count = 1;
+    //public int _count = 1;
 
-    void Start()
+    void Awake()
     {
         slots = go_SlotsParent.GetComponentsInChildren<SLot>();
         slots1 = go_SlotsParent1.GetComponentsInChildren<SLot1>();

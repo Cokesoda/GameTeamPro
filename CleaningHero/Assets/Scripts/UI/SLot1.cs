@@ -22,7 +22,7 @@ public class SLot1 : MonoBehaviour
     }
 
     // 인벤토리에 새로운 아이템 슬롯 추가
-    public void AddItem(Item _item, int _count = 1)
+    public void AddItem(Item _item, int _count)
     {
         item = _item;
         itemCount = _count;
