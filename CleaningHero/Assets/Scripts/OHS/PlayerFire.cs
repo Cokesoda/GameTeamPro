@@ -38,6 +38,7 @@ public class PlayerFire : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            this.GetComponent<PlayerSoundManager>().AttackSound.Play();
             if (anim.GetFloat("MoveMotion") == 0)
             {
                 anim.SetTrigger("Attack");

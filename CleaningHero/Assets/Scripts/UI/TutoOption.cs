@@ -10,7 +10,7 @@ public class TutoOption : MonoBehaviour
     public GameObject gameOption;
     public GameObject keySet;
     public AudioSource bgm;
-    public AudioSource em;
+    public GameObject em;
     public Slider bgmBar;
     public Slider emBar;
     public GameObject Inven;
@@ -118,7 +118,12 @@ public class TutoOption : MonoBehaviour
         }
 
         bgm.volume = bgmBar.value;
-        em.volume = emBar.value;
+        em.GetComponent<EMValue>().E1Attack.volume = emBar.value;
+        em.GetComponent<EMValue>().E2Attack.volume = emBar.value;
+        em.GetComponent<EMValue>().Ehit.volume = emBar.value;
+        em.GetComponent<EMValue>().PAttack.volume = emBar.value;
+        em.GetComponent<EMValue>().PHit.volume = emBar.value;
+        em.GetComponent<EMValue>().PHeal1.volume = emBar.value;
     }
     public void OnClickOption()
     {
