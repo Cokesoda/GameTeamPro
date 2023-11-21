@@ -133,6 +133,7 @@ public class PlayerMove : MonoBehaviour
     IEnumerator PlayHitEffect()
     {
         anim.SetTrigger("Damage");
+        this.GetComponent<PlayerSoundManager>().HitSound.Play();
         playerStatus.playerHp -= 1;
         yield return new WaitForSeconds(0.3f);
     }
